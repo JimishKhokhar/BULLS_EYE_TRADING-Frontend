@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="favivon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,500&family=Londrina+Solid:wght@100;300;400&family=Montserrat:wght@300;400;700&family=Mulish&family=Roboto+Slab:wght@300;400;600&family=Signika+Negative:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,500&family=Londrina+Solid:wght@100;300;400&family=Montserrat:wght@300;400;700&family=Mulish&family=Roboto+Slab:wght@300;400;600&family=Signika+Negative:wght@400;500;600&family=Ysabeau+Office:wght@500;700;800&display=swap"
+    rel="stylesheet">
+  <link id="theme-link" rel="stylesheet" href="/themes/lara-light-blue/theme.css">
+
+
+
+
+
+  <meta name="theme-color" content="#ffffff">
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>React App</title>
+
+  <style>
+    input,
+    textarea,
+    button,
+    select,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .dont-blink {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    .max-two-lines {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+
+
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0px 0px 3px rgba(255, 255, 255);
+
+    }
+
+    .scrollbar {
+      scrollbar-color: #007 #bada55;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Josefin Sans', sans-serif;
+      font-family: 'Londrina Solid', cursive;
+      font-family: 'Montserrat', sans-serif;
+      font-family: 'Mulish', sans-serif;
+      font-family: 'Roboto Slab', serif;
+      font-family: 'Signika Negative', sans-serif;
+
+
+      font-family: 'Josefin Sans', sans-serif;
+      font-family: 'Londrina Solid', cursive;
+      font-family: 'Montserrat', sans-serif;
+      font-family: 'Mulish', sans-serif;
+      font-family: 'Roboto Slab', serif;
+      font-family: 'Signika Negative', sans-serif;
+      font-family: 'Ysabeau Office', sans-serif;
+    }
+
+    .truncate {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      /* number of lines to show */
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+
+    ::-moz-selection {
+      /* Code for Firefox */
+      color: black;
+      background: white;
+    }
+
+    ::selection {
+      color: black;
+      background: white;
+    }
+
+    .bottomUp {
+      transition: all;
+      transition-delay: 1000;
+
+    }
+
+    @keyframes rollout {
+      0% {
+        transform: translateY(150px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .roll-out {
+      animation: .4s rollout;
+    }
+
+    @keyframes rollDown {
+      0% {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+
+
+
+    .roll-down {
+      animation: rollDown 0.3s ease-out;
+    }
+
+    /* Arrow Buttons removal code from input tag */
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .shadow-custom {
+      color: white;
+      text-shadow: 2px 2px 0px black;
+    }
+
+    .shadow-custom-box {
+      box-shadow: 7px 7px black;
+    }
+
+    .shadow-custom-box-small {
+      box-shadow: 4px 4px black;
+    }
+
+    .selected-icon {
+      color: black !important;
+      /* Set the selected icon color to black */
+      background-color: white !important;
+      /* Set the selected background color to white */
+    }
+
+    .Mui-selected {
+      color: black !important;
+      /* Set the selected icon color to black */
+      background-color: red !important;
+      /* Set the selected background color to red */
+    }
+  </style>
+
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div>
+    <div id="root"></div>
+  </div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+</body>
+
+</html>
