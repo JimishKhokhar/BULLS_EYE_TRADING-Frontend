@@ -170,7 +170,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                             }}
                         >History</Button>
                     </div>
-                    <div className={`grid grid-cols-2 gap-4 mt-2  transition-all duration-300 -mr-10 `} >
+                    <div className={`grid grid-cols-2 gap-2 md:gap-4 mt-2  transition-all duration-300 -mr-10 `} >
 
                         <Button
 

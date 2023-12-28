@@ -8,9 +8,11 @@ import { getStockQuote } from '../utils';
 import useMarketTimeChecker from './marketTimeChecker';
 
 
-const BuyDialog = ({ closeTheDialog, stockToBuy ,updateHoldingCardForBuying}) => {
+const BuyDialog = ({ closeTheDialog, stockToBuy, updateHoldingCardForBuying }) => {
 
     const isMarketLive = useMarketTimeChecker();
+
+    const [isFreeze, setIsFreeze] = useState(false);
 
 
     // const stockQuote={c:120.34,l:110.33,h:222.32};
@@ -139,6 +141,11 @@ const BuyDialog = ({ closeTheDialog, stockToBuy ,updateHoldingCardForBuying}) =>
 
                                             className='w-full  p-3 bg-green-700 text-3xl font-bold' onClick={async () => {
 
+                                                if (isFreeze) {
+                                                    infoAlert("Wait To Execute The Current Order!");
+                                                    return;
+                                                }
+
                                                 if (!isMarketLive) {
                                                     failAlert("Order FAILED! Market is Not Live!", "top-center");
                                                     await sleep(3000);
@@ -146,7 +153,8 @@ const BuyDialog = ({ closeTheDialog, stockToBuy ,updateHoldingCardForBuying}) =>
                                                     return;
                                                 }
 
-
+                                                setIsFreeze(true);
+                                                
                                                 const result = await buyStock(userObject._id, stockToBuy, stockQuote?.c, quantity, new Date());
                                                 getStockQuoteLocal();
                                                 if (result == 0) {
@@ -156,10 +164,12 @@ const BuyDialog = ({ closeTheDialog, stockToBuy ,updateHoldingCardForBuying}) =>
                                                     failAlert(`Not Enough Balance To Trade! \n Current Balance: ${"$" + Number(currentBalance).toFixed(2)}`, "top-center");
                                                 }
                                                 else if (result == 1) {
-                                                    if(updateHoldingCardForBuying)
-                                                    updateHoldingCardForBuying();
+                                                    if (updateHoldingCardForBuying)
+                                                        updateHoldingCardForBuying();
                                                     successAlert(`Successfully Bought ${stockToBuy}`, 'top-center');
                                                 }
+
+                                                setIsFreeze(false);
                                             }}>BUY</Button>
                                     </div>
                                 </div>

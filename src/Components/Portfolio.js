@@ -386,14 +386,14 @@ const Portfolio = () => {
                       </div>
 
                       <div className='dont-blink select-none mx-auto grid grid-cols-2 gap-3 w-full md:min-w-[50%] md:max-w-[50%] m-3 transition-all duration-500'>
-                        <div>
+                        <div className=''>
                           {
                             innerComponent == 0 ?
-                              <div className='bg-black w-full rounded-lg border-2 font-bold border-indigo-700 h-fit flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl p-4 mx-auto'>ACTIVE</span>
+                              <div className='bg-black w-full rounded-lg border-2  box-border font-bold border-white h-fit flex justify-center cursor-pointer transition-all duration-500'>
+                                <span className='text-2xl md:p-4 py-2 mx-auto'>ACTIVE</span>
                               </div> :
                               <div onClick={() => { setInnerComponent(0) }} className='bg-slate-800 w-full rounded-lg h-fit border-2 border-black  flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl p-4 mx-auto'>ACTIVE</span>
+                                <span className='text-2xl md:p-4 py-2  mx-auto'>ACTIVE</span>
                               </div>
 
                           }
@@ -402,11 +402,11 @@ const Portfolio = () => {
                         <div>
                           {
                             innerComponent == 1 ?
-                              <div className='bg-black w-full rounded-lg border-2 font-bold border-indigo-700 h-fit flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl p-4 mx-auto'>HISTORY</span>
+                              <div className='bg-black w-full rounded-lg border-2 box-border font-bold border-white h-fit flex justify-center cursor-pointer transition-all duration-500'>
+                                <span className='text-2xl md:p-4 py-2  mx-auto'>HISTORY</span>
                               </div> :
                               <div onClick={() => { setInnerComponent(1) }} className='bg-slate-800 w-full rounded-lg h-fit border-2 border-black  flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl p-4 mx-auto'>HISTORY</span>
+                                <span className='text-2xl md:p-4 py-2  mx-auto'>HISTORY</span>
                               </div>
 
                           }
