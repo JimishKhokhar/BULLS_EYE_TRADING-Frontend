@@ -13,6 +13,7 @@ const Stocks=()=>{
     useEffect(()=>{
         document.title="Stocks"
         setSelectedComponent("Stocks");
+        window.scrollTo(0, 0)
     },[]);
 
 

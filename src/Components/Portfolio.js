@@ -119,6 +119,7 @@ const Portfolio = () => {
 
     document.title="Portfolio"
     setSelectedComponent("Portfolio");
+    window.scrollTo(0, 0)
     if (!isLoggedIn)
       return;
 
@@ -278,7 +279,7 @@ const Portfolio = () => {
 
 
   return (
-    <div className=' w-full md:pt-16 bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white'>
+    <div className=' transition-all duration-500 w-full md:pt-16 bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white'>
       {/* <button className='text-white' onClick={() => { setInnerComponent(1 ? innerComponent == 0 : 0) }}>Change Component</button> */}
 
       <div>
@@ -447,7 +448,7 @@ const Portfolio = () => {
 
                               :
 
-                              <div className='flex flex-col gap-2 mt-5'>
+                              <div className='flex flex-col gap-2 mt-2 md:mt-5'>
                                 {allHoldings?.map((holding, index) => (
                                   <HoldingCard
                                     isOpen={isOpen}

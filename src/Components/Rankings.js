@@ -35,6 +35,7 @@ const Rankings = () => {
   useEffect(() => {
     document.title = "Rankings"
     setSelectedComponent("Rankings");
+    window.scrollTo(0, 0)
     findIt()
 
   }, []);

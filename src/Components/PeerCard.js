@@ -113,15 +113,15 @@ const PeerCard = ({ props }) => {
     return (
 
         <div>
-            <div className=" overflow-hidden md:h-[230px] min-w-[80vw] max-w-[80vw]   md:min-w-[400px] p-3  relative mb-5 text-white bg-black rounded-lg ">
+            <div className=" overflow-hidden md:h-[230px] min-w-[80vw] max-w-[80vw]   md:min-w-[400px] p-2 md:p-3  relative mb-5 text-white bg-black rounded-lg ">
 
 
 
                 <div className="flex gap-3 items-center">
                     <div className="flex flex-col ">
-                        <h2 className="text-2xl truncate">{stock}</h2>
+                        <span className="text-xl md:text-2xl truncate ">{stock}</span>
                         <div className="w-full flex gap-3 items-center">
-                            <h2 className="text-lg mt-1 text-gray-600 font-bold  tracking-widest">{profile.ticker}</h2>
+                            <h2 className="text-lg mt-1 text-gray-600 font-bold  tracking-widest ">{profile.ticker}</h2>
                             <div className="flex gap-2 items-center w-fit ">
                                 <span className=" text-center text-xl"><span className="font-bold">$</span> {endPrice}</span>
                                 {
@@ -152,7 +152,7 @@ const PeerCard = ({ props }) => {
                                 </linearGradient>
                             </defs>
 
-                            <XAxis dataKey="time" />
+                            <XAxis dataKey="time"  />
                             <Tooltip />
                             <YAxis domain={[startPrice, endPrice]}
                                 type="number"

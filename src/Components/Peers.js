@@ -157,7 +157,7 @@ const Peers = () => {
 
     return (
         <div className="w-full h-fit bg-slate-800  select-none pt-4">
-            <div className="max-w-[90%] min-w-[90%] mx-auto   md:px-6">
+            <div className="md:max-w-[90%] md:min-w-[90%] max-w-[95%] min-w-[95%] mx-auto   md:px-6">
                 <div className="md:hidden block pb-4">
                     <Sidebar />
                 </div>
@@ -174,7 +174,7 @@ const Peers = () => {
                             <div className="flex gap-3">
                                 {
                                     [1, 2, 3, 4, 5].map((item) => {
-                                        return <div className=" flex justify-center items-center md:h-[225px] min-w-[80vw] max-w-[80vw] min-h-[225px] mb-5   md:min-w-[400px] bg-black rounded-lg">
+                                        return <div className=" flex justify-center items-center md:h-[225px] min-w-[80vw] max-w-[80vw] min-h-[190px] mb-5   md:min-w-[400px] bg-black rounded-lg">
                                             <span className="text-white ">Loading...</span>
                                         </div>
                                     })

@@ -20,6 +20,7 @@ const UserCover = () => {
     useEffect(() => {
         document.title="Profile"
         setSelectedComponent("profile");
+        window.scrollTo(0, 0)
     }, []);
 
     return (

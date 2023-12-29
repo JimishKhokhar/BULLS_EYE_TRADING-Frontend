@@ -36,10 +36,14 @@ const Footer = () => {
 
             </div>
 
-            <div className="text-white w-full pb-3 flex justify-center mt-5 md:mt-10">
-                <span className="text-2xl font-bold  ">{`Total Users: ${totalUsers}`}</span>
+            {
+                <div className="text-white w-full pb-3 flex justify-center mt-5 md:mt-10">
+                    <span className="text-2xl font-bold  ">{`Total Users: ${totalUsers==-1?"Loading..":totalUsers}`}</span>
 
-            </div>
+                </div>
+            }
+
+
 
             <div className="text-white md:pt-5 md:text-xl mx-auto grid  grid-rows-2 gap-4 min-w-[60%] max-w-[60%] pb-14 md:grid-cols-2 ">
                 <div className="w-full h-full flex flex-col md:gap-4 gap-2">

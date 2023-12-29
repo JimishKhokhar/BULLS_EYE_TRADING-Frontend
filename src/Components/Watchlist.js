@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
-import { UserDataContext,ComponentDataContext } from '../App'
+import { UserDataContext, ComponentDataContext } from '../App'
 import { getWatchlistUtils } from '../utils'
 import { Button } from '@cred/neopop-web/lib/components'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -10,7 +10,9 @@ import BuyDialog from './BuyDialog'
 
 const Watchlist = () => {
 
- 
+
+  const [isLoading, setIsLoading] = useState(true);
+
 
 
   const { setSelectedComponent, failAlert } = useContext(ComponentDataContext);
@@ -23,6 +25,7 @@ const Watchlist = () => {
 
 
   async function getWatchlist() {
+    setIsLoading(true);
     const result = await getWatchlistUtils(userObject?._id);
     if (result != undefined) {
       console.log("Got the WatchList from WatchList Component", result);
@@ -30,23 +33,26 @@ const Watchlist = () => {
     }
     else
       console.log("Failed to get the watchlist")
+
+    setIsLoading(false)
+
   }
 
   //for deleting local instance of watchlist 
-  async function deleteFromLocal(stockSymbol)
-  {
+  async function deleteFromLocal(stockSymbol) {
     let WatchlistDuplicate = [...Watchlist]; // Replace with your actual Watchlist array
 
     // Use the filter function to create a new array excluding the object with the specified stockSymbol
     const updatedWatchlist = WatchlistDuplicate.filter(item => item.stockSymbol !== stockSymbol);
     setWatchlist(updatedWatchlist);
-    
+
   }
 
 
   useEffect(() => {
-    document.title="WatchList"
+    document.title = "WatchList"
     setSelectedComponent("Watchlist");
+    window.scrollTo(0, 0)
     if (isLoggedIn)
       getWatchlist();
   }, []);
@@ -57,15 +63,15 @@ const Watchlist = () => {
 
   }, [Watchlist])
 
-    const [isOpen, setIsOpen] = useState(0);//1 for buy stock and 2 for sell stock
-    function closeTheDialog() {
-        setIsOpen(0);
-    }
+  const [isOpen, setIsOpen] = useState(0);//1 for buy stock and 2 for sell stock
+  function closeTheDialog() {
+    setIsOpen(0);
+  }
 
-    const [stockToBuy,setStockToBuy]=useState("");
-    useEffect(()=>{
-        console.log("Buying ",stockToBuy);
-    },[stockToBuy]);
+  const [stockToBuy, setStockToBuy] = useState("");
+  useEffect(() => {
+    console.log("Buying ", stockToBuy);
+  }, [stockToBuy]);
 
 
 
@@ -81,6 +87,8 @@ const Watchlist = () => {
       }
 
       {
+
+
         !isLoggedIn ?
           <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
             <span className='m-auto text-lg md:text-3xl text-center flex flex-col justify-center items-center gap-3'>
@@ -96,20 +104,25 @@ const Watchlist = () => {
             </span>
           </div>
           :
-
-          Watchlist.length == 0 ?
+          isLoading ?
             <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 max-h-[calc(100vh-61px)] md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
-              <span className='m-auto text-lg md:text-3xl text-center'>No Stocks...</span>
-            </div> :
-            <div className='min-h-4/5  min-h-[calc(100vh-61px)]  mt-1'>
-              {
-                Watchlist.map((item) => {
-                  return (
-                    <div className='transition-all duration-500 '><WatchlistCard deleteFromLocal={deleteFromLocal} item={item} setIsOpen={setIsOpen} setStockToBuy={setStockToBuy}/></div>
-                  )
-                })
-              }
+              <span className='m-auto text-lg md:text-3xl text-center'>Loading...</span>
             </div>
+            :
+
+            Watchlist.length == 0 ?
+              <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 max-h-[calc(100vh-61px)] md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
+                <span className='m-auto text-lg md:text-3xl text-center'>No Stocks...</span>
+              </div> :
+              <div className='min-h-4/5  min-h-[calc(100vh-61px)]  mt-1'>
+                {
+                  Watchlist.map((item) => {
+                    return (
+                      <div className='transition-all duration-500 '><WatchlistCard deleteFromLocal={deleteFromLocal} item={item} setIsOpen={setIsOpen} setStockToBuy={setStockToBuy} /></div>
+                    )
+                  })
+                }
+              </div>
       }
     </div >
   )

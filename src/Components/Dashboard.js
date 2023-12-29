@@ -124,7 +124,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // return;
 
 
-    const queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime)}&end_date=${formatMillisecondsToDateTime(endTime)}&symbol=${currentStock}&format=JSON`;
+    const queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime,buttonSelected==0)}&end_date=${formatMillisecondsToDateTime(endTime,false)}&symbol=${currentStock}&format=JSON`;
     let response = await fetch(queryString);
     // console.log(queryString)
 
@@ -271,7 +271,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   return (
 
     <div>
-      <div className="pt-[140px] md:pt-16  overflow-hidden  min-w-full max-w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
+      <div className="pt-[120px] md:pt-16  overflow-hidden  min-w-full max-w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
         <div className="  flex justify-center  md:max-w-[90%] w-full   mx-auto md:max-h-[calc(100vh-61px)] md:min-h-[calc(100vh-61px)] md:p-5">
 
