@@ -13,6 +13,7 @@ import Tailwind from "../Images/tailwind-svgrepo-com.svg"
 import Gmail from "../Images/gmail-svgrepo-com.svg"
 import Linkedin from "../Images/linkedin-svgrepo-com.svg"
 import Github from "../Images/github-svgrepo-com.svg"
+import indianFlag from "../Images/india-svgrepo-com.svg"
 
 import { findMarketStatusUtils } from "../utils";
 
@@ -27,6 +28,10 @@ const Footer = () => {
 
         <div className=" relative w-full  min-h-[350px] md:pb-0  flex flex-col    bg-black  md:pt-0">
             <div className="flex flex-col  w-full items-center justify-center absolute bottom-14  md:bottom-2">
+            <span className=" flex w-full  gap-1 justify-center items-center self-start  ">
+                        <span className="text-white ">Made In INDIA</span>
+                        <img className="min-w-[20px] max-w-[20px]" src={indianFlag} />
+                    </span>
                 <img src={Logo} className="h-[15px] md:h-[30px] mx-auto " onClick={() => {
                     // console.log(userObject, isLoggedIn, user)
                     findMarketStatusUtils()
@@ -38,10 +43,11 @@ const Footer = () => {
 
             {
                 <div className="text-white w-full pb-3 flex justify-center mt-5 md:mt-10">
-                    <span className="text-2xl font-bold  ">{`Total Users: ${totalUsers==-1?"Loading..":totalUsers}`}</span>
+                    <span className="text-2xl font-bold  ">{`Total Users: ${totalUsers == -1 ? "Loading.." : totalUsers}`}</span>
 
                 </div>
             }
+
 
 
 
@@ -75,7 +81,13 @@ const Footer = () => {
 
                 </div>
 
+                
+
             </div>
+
+
+
+
 
 
 

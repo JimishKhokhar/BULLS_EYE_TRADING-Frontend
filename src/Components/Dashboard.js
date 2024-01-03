@@ -342,21 +342,21 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
             }
           </div> */}
 
-            <div className="mt-3 flex gap-5 items-center md:w-fit md:pl-0 pl-3">
+            <div className="mt-3 flex gap-2 md:gap-5 items-center md:w-fit md:pl-0 pl-3">
 
 
 
               <span className=" text-center text-4xl "> {"$" + Number(stockQuote.c).toFixed(2)}</span>
-              <div className="flex justify-center mt-1">
+              <div className="flex justify-center mt-1 flex-1">
                 {
                   ((((endPrice - startPrice) / startPrice) * 100).toFixed(2) >= 0) ?
                     <div className="flex gap-3  items-center flex-row-reverse">
-                      <span className="p-2 bg-[#3eff3ea1] rounded-lg text-lg font-bold flex justify-center items-center gap-1 "><img src={upTrend} width="25" /> {(((endPrice - startPrice) / startPrice) * 100).toFixed(2)}%  </span>
+                      <span className="md:p-2 p-1 bg-[#3eff3ea1] rounded-lg text-lg font-bold flex justify-center items-center gap-1 "><img src={upTrend} width="25" /> {(((endPrice - startPrice) / startPrice) * 100).toFixed(2)}%  </span>
                       <span className="text-2xl md:p-2 text-[#3eff3ea1] font-bold">{`+$${Number(endPrice - startPrice).toFixed(2)}`}</span>
                     </div> :
 
                     <div className="flex gap-3  items-center flex-row-reverse">
-                      <span className="p-2 bg-red-500 rounded-lg text-lg font-bold flex justify-center items-center gap-1"><img src={downTrend} width="25" /> {(((endPrice - startPrice) / startPrice) * 100).toFixed(2)}%</span>
+                      <span className="md:p-2 p-1 bg-red-500 rounded-lg text-lg font-bold flex justify-center items-center gap-1"><img src={downTrend} width="25" /> {(((endPrice - startPrice) / startPrice) * 100).toFixed(2)}%</span>
                       <span className="text-2xl p-2 text-red-500 font-bold">{`- $${Math.abs(Number(endPrice - startPrice)).toFixed(2)}`}</span>
                     </div>
 

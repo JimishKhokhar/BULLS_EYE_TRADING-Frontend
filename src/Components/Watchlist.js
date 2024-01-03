@@ -106,7 +106,7 @@ const Watchlist = () => {
           :
           isLoading ?
             <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 max-h-[calc(100vh-61px)] md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
-              <span className='m-auto text-lg md:text-3xl text-center'>Loading...</span>
+              <span className='m-auto text-2xl md:text-2xl text-center'>Loading...</span>
             </div>
             :
 

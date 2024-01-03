@@ -41,7 +41,7 @@ const MainMenu = () => {
     };
 
     return (
-        <div className='md:hidden block'>
+        <div className='md:hidden block  bg-black'>
             <BottomNavigation
                 value={selectedComponent}
                 onChange={handleNavChange}
@@ -52,7 +52,11 @@ const MainMenu = () => {
                     bottom: -4,
                     zIndex: 20,
                     colorScheme: 'dark',
-                    backgroundColor: 'black',
+                    backgroundColor: 'black','& .MuiBottomNavigationAction-root': {
+                        // Adjust the spacing between menu items here
+                        minWidth: 'auto',
+                        padding: '15px', // Adjust the padding as needed
+                    }
                 }}
 
             >

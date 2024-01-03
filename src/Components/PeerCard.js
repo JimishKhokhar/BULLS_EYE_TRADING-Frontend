@@ -113,7 +113,7 @@ const PeerCard = ({ props }) => {
     return (
 
         <div>
-            <div className=" overflow-hidden md:h-[230px] min-w-[80vw] max-w-[80vw]   md:min-w-[400px] p-2 md:p-3  relative mb-5 text-white bg-black rounded-lg ">
+            <div className=" overflow-hidden md:h-[250px] min-w-[80vw] max-w-[80vw]   md:min-w-[400px] p-2 md:p-3  relative mb-5 text-white bg-black rounded-lg ">
 
 
 
@@ -121,8 +121,9 @@ const PeerCard = ({ props }) => {
                     <div className="flex flex-col ">
                         <span className="text-xl md:text-2xl truncate ">{stock}</span>
                         <div className="w-full flex gap-3 items-center">
-                            <h2 className="text-lg mt-1 text-gray-600 font-bold  tracking-widest ">{profile.ticker}</h2>
-                            <div className="flex gap-2 items-center w-fit ">
+                            <span className="text-lg  text-gray-600 font-bold  tracking-widest ">{profile.ticker}</span>
+                        </div>
+                        <div className="flex gap-2 items-center w-fit ">
                                 <span className=" text-center text-xl"><span className="font-bold">$</span> {endPrice}</span>
                                 {
                                     ((((endPrice - startPrice) / startPrice) * 100).toFixed(2) >= 0) ?
@@ -130,7 +131,6 @@ const PeerCard = ({ props }) => {
                                         <span className="px-2 bg-red-300 rounded-lg text-md font-bold flex justify-center items-center gap-1"><img src={downTrend} width="25" /> {(((endPrice - startPrice) / startPrice) * 100).toFixed(2)}%</span>
                                 }
                             </div>
-                        </div>
                     </div>
                     <img src={logo} className="w-[45px] absolute right-2 top-2 rounded-sm md:right-4 md:top-3" />
                 </div>

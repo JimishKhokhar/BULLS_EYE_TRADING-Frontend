@@ -56,7 +56,7 @@ const Rankings = () => {
 
             {
               isDataLoading ?
-                <span className=' text-3xl p-10 text-white'>Loading...</span>
+                <span className=' text-2xl p-10 text-white'>Loading...</span>
                 :
                 <div className='   flex flex-col  md:pt-0 pt-14'>
                   <div className='w-[90vw]  mx-auto     md:min-w-[80%] md:max-w-[80%]  gap-3  grid grid-rows-3 grid-cols-none md:grid-cols-3 md:grid-rows-none md:gap-2'>

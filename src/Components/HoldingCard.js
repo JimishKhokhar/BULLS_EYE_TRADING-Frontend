@@ -40,7 +40,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
     return (
         <div className={ ` select-none overflow-hidden holding-card text-white bg-slate-700 min-w-full max-w-full rounded-md  md:px-10 transition-all duration-300 ${isOpen ? 'md:pr-28' : ''} `}>
-            <div className={`flex justify-start p-2 md:p-3  flex-col `}>
+            <div className={`flex justify-start p-2 md:p-3   flex-col `}>
                 <div className='text-2xl md:text-3xl  w-full  bg-black md:bg-slate-700  font-bold shadow-custom rounded-lg pb-1 md:pb-2  flex justify-center md:justify-start' onClick={() => { setIsOpen(!isOpen) }}>
                     <span className=' text-white  md:px-3  md:py-1 mt-1 bg-black rounded-lg'>{stock}</span>
                     
@@ -48,13 +48,13 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
                 <div className="grid grid-cols-3 gap-1 md:gap-4 w-full text-xl z-20 ">
                     <div className=' self-center flex flex-col md:flex-row items-baseline md:gap-3 ' >
-                        <div className='w-full md:w-fit text-center '>Quantity </div>
+                        <div className='w-full md:w-fit text-center  text-lg  md:text-xl'>Quantity </div>
                         <span className='hidden md:inline'>→</span>
                         <div className='text-md md:text-2xl font-bold w-full md:w-fit text-center '> {new Number(quantity).toFixed(0)}</div>
                     </div>
 
                     <div className=' self-center mx-auto flex flex-col  md:flex-row items-baseline md:gap-3' >
-                        <div className='w-full md:w-fit text-center '>Avg. Price </div>
+                        <div className='w-full md:w-fit text-center text-lg md:text-xl'>Avg. Price </div>
                         <span className='hidden md:inline'>→</span>
                         <div className='text-md md:text-2xl font-bold w-full md:w-fit text-center'>
                             {"$" + Number(avgPrice).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}
@@ -62,7 +62,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                     </div>
 
                     <div className=' self-center md:ml-auto flex flex-col md:flex-row items-baseline md:gap-3' >
-                        <div className='w-full md:w-fit text-center '>Live Price</div>
+                        <div className='w-full md:w-fit text-center text-lg md:text-xl'>Live Price</div>
                         <span className='hidden md:inline'>→</span>
                         <div className='text-md md:text-2xl font-bold w-full md:w-fit text-center'>
                             {
@@ -78,7 +78,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
 
                     <div className=' self-center  flex flex-col md:flex-row items-baseline' >
-                        <div className='w-full md:w-fit text-center '>Market Value </div>
+                        <div className='w-full md:w-fit text-center md:text-xl text-lg'>Market Value </div>
                         <span className='hidden md:inline'>→</span>
                         <div className='text-md md:text-2xl font-bold w-full md:w-fit text-center'>
                             {"$" + marketValue.toLocaleString('en-IN', {
@@ -93,7 +93,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                     {
                         gainLoss >= 0 ?
                             <div className=' self-center mx-auto flex flex-col md:flex-row items-baseline md:gap-3' >
-                                <div className='w-full md:w-fit text-center '>Gain Loss </div>
+                                <div className='w-full md:w-fit text-center md:text-xl text-lg'>Gain Loss </div>
                                 <span className='hidden md:inline'>→</span>
                                 <div className='text-md md:text-2xl text-green-400 font-bold w-full md:w-fit text-center'>
 
@@ -106,7 +106,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                             </div> :
 
                             <div className=' self-center mx-auto flex flex-col md:flex-row items-baseline md:gap-3' >
-                                <div className='w-full md:w-fit text-center '>Gain Loss </div>
+                                <div className='w-full md:w-fit text-center md:text-xl text-lg'>Gain Loss </div>
                                 <span className='hidden md:inline'>→</span>
                                 <div className='text-md md:text-2xl text-red-500 font-bold w-full md:w-fit text-center'>
                                     {
@@ -123,7 +123,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                     {
                         returnPercentage >= '0' ?
                             <div className=' self-center md:ml-auto flex flex-col md:flex-row items-baseline md:gap-3' >
-                                <div className='w-full md:w-fit text-center '>Returns</div>
+                                <div className='w-full md:w-fit text-center text-lg md:text-xl'>Returns</div>
                                 <span className='hidden md:inline'>→</span>
                                 <span className='mx-auto text-md md:text-2xl font-bold text-green-400 flex'>
                                     {
@@ -134,7 +134,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
                             </div> :
                             <div className=' self-center md:ml-auto flex flex-col md:flex-row items-baseline md:gap-3' >
-                                <div className='w-full md:w-fit text-center '>Returns  </div>
+                                <div className='w-full md:w-fit text-center text-lg md:text-xl'>Returns  </div>
                                 <span className='hidden md:inline'>→</span>
                                  <span className='mx-auto text-md md:text-2xl font-bold text-red-500 flex  items-center justify-center align-middle'> {
                                 !isPricesLoading ? returnPercentage.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' }) : "---"

@@ -153,8 +153,8 @@ const LogoHeader = ({ selectedComponent }) => {
                                             // onButtonClick();
                                         }}>
                                             <div className="px-3 group flex gap-2 border-y border-gray-700 border-1  rounded-md hover:bg-indigo-700  transition-all duration-300 cursor-pointer">
-                                                <span className="text-indigo-700 font-bold text-md group-hover:text-black">{r.Symbol}</span>
-                                                <span className="text-white text-md">{r.Name}</span>
+                                                <span className="text-indigo-700 min-w-[25%] max-w-[25%] font-bold text-md group-hover:text-black">{r.Symbol}</span>
+                                                <span className="text-white text-md min-w-[70%] max-w-[70%]">{r.Name}</span>
                                             </div>
 
                                         </div>

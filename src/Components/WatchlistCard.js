@@ -85,7 +85,7 @@ const WatchlistCard = ({ item, setIsOpen, setStockToBuy ,deleteFromLocal }) => {
                         <span className='text-gray-400 hidden md:block'>{item.stockSymbol}</span>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-1 md:gap-4 w-full text-xl z-20  py-2  items-center  md:px-10">
+                    <div className="grid grid-cols-3 gap-1  w-full text-xl z-20  py-2  items-center  md:px-5">
                         <div className=' self-center flex flex-col md:flex-row items-baseline md:gap-3 ' >
                             <div className='w-full md:w-fit text-center  '>Low </div>
                             <span className='hidden md:inline'>→</span>
@@ -101,7 +101,7 @@ const WatchlistCard = ({ item, setIsOpen, setStockToBuy ,deleteFromLocal }) => {
 
                         </div>
 
-                        <div className=' self-center mx-auto flex flex-col  md:flex-row items-baseline md:gap-3' >
+                        <div className='self-center mx-auto flex flex-col  md:flex-row items-baseline  gap-1' >
                             <div className='w-full md:w-fit text-center '>Prev. Close </div>
                             <span className='hidden md:inline'>→</span>
                             <div className='text-md md:text-2xl  w-full md:w-fit text-center'>

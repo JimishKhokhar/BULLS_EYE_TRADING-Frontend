@@ -171,6 +171,13 @@ const Header = () => {
                                 }
                             </div>
                         </Link>
+                        <Link to="/Watchlist" >
+                            <div className="" onClick={() => { setSelectedComponent('Watchlist') }}>
+                                {
+                                    selectedComponent == 'Watchlist' ? <span className=" text-white text-xl font-bold border-b-4 border-indigo-500">Watchlist</span> : <span className=" text-white text-xl  ">Watchlist</span>
+                                }
+                            </div>
+                        </Link>
                         <Link to="/Portfolio" >
                             <div className="" onClick={() => { setSelectedComponent('Portfolio') }}>
                                 {
@@ -185,13 +192,7 @@ const Header = () => {
                                 }
                             </div>
                         </Link>
-                        <Link to="/Watchlist" >
-                            <div className="" onClick={() => { setSelectedComponent('Watchlist') }}>
-                                {
-                                    selectedComponent == 'Watchlist' ? <span className=" text-white text-xl font-bold border-b-4 border-indigo-500">Watchlist</span> : <span className=" text-white text-xl  ">Watchlist</span>
-                                }
-                            </div>
-                        </Link>
+
                         <Link to="/Profile" >
                             <div className="" onClick={() => { setSelectedComponent('profile') }}>
                                 {
@@ -233,9 +234,9 @@ const Header = () => {
 
                                                             // onButtonClick();
                                                         }}>
-                                                            <div className="px-3 group flex gap-2 border-y border-gray-700 border-1  rounded-md hover:bg-indigo-700  transition-all duration-300 cursor-pointer">
-                                                                <span className="text-indigo-700 font-bold text-xl group-hover:text-black">{r.Symbol}</span>
-                                                                <span className="text-white ">{r.Name}</span>
+                                                            <div className="px-3 group flex gap-2 border-y border-gray-700 border-1  rounded-md hover:bg-indigo-700  transition-all duration-100 cursor-pointer">
+                                                                <span className="text-indigo-700 font-bold text-xl group-hover:text-black min-w-[25%] max-w-[25%]">{r.Symbol}</span>
+                                                                <span className="text-white min-w-[70%] max-w-[70%]">{r.Name}</span>
 
 
 
