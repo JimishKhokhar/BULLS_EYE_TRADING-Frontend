@@ -56,7 +56,7 @@ const MainMenu = () => {
                         // Adjust the spacing between menu items here
                         minWidth: 'auto'
                     },
-                    height:'65px'
+                    height:'60px'
                 }}
 
             >
