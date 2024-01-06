@@ -174,7 +174,7 @@ const Peers = () => {
                             <div className="flex gap-3">
                                 {
                                     [1, 2, 3, 4, 5].map((item) => {
-                                        return <div className=" flex justify-center items-center md:h-[225px] min-w-[80vw] max-w-[80vw] min-h-[190px] mb-5   md:min-w-[400px] bg-black rounded-lg">
+                                        return <div className=" flex justify-center items-center md:h-[250px] min-w-[80vw] max-w-[80vw] min-h-[215px] mb-5   md:min-w-[400px] bg-black rounded-lg">
                                             <span className="text-white ">Loading...</span>
                                         </div>
                                     })

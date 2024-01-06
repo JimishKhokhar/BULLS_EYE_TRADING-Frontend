@@ -124,9 +124,21 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // return;
 
 
-    const queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime,buttonSelected==0)}&end_date=${formatMillisecondsToDateTime(endTime,false)}&symbol=${currentStock}&format=JSON`;
+    let queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime,buttonSelected==0,false)}&end_date=${formatMillisecondsToDateTime(endTime,false,false)}&symbol=${currentStock}&format=JSON`;
     let response = await fetch(queryString);
     // console.log(queryString)
+
+    // let temp=await response.json();
+    let pureData = await response.json();
+    console.log("From 12 Data", pureData);
+    if(pureData.code==400)
+    {
+      console.warn("Errir")
+      queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime-106400,buttonSelected==0,true)}&end_date=${formatMillisecondsToDateTime(endTime,false,false)}&symbol=${currentStock}&format=JSON`;
+      response = await fetch(queryString);
+      pureData = await response.json();
+      console.log("From 12 Data", pureData);
+    }
 
 
 
@@ -140,8 +152,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // console.log(response);
     // console.log("Jimish")
 
-    let pureData = await response.json();
-    console.log("From 12 Data", pureData);
+    
 
 
     // if (pureData['s'] == "no_data") {

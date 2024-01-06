@@ -11,13 +11,13 @@ export async function getAllSearchResults(searchText)
     return commonStocks;
 }
 
-export function formatMillisecondsToDateTime(milliseconds,isSet900) {
+export function formatMillisecondsToDateTime(milliseconds,isSet900,isAgainStart) {
   const date = new Date((milliseconds*1000));
 
   const formatted_date=new Date(Date.parse(date.toLocaleString('en-US', { timeZone: 'America/New_York' })))
   const AmericanMilliseconds=Date.parse(formatted_date)
 
-  console.log("American TIME",new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }))
+  // console.log("American TIME",new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }))
 
   
 
@@ -36,6 +36,13 @@ export function formatMillisecondsToDateTime(milliseconds,isSet900) {
   if(isSet900)
   {
     let AmericanDate=Date.parse(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+
+    if(isAgainStart)
+    {
+      AmericanDate=Date.parse(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }))- 86400000;
+    }
+
+
     let FinalAmericanTime=new Date(AmericanDate);
 
     year = FinalAmericanTime.getFullYear();
@@ -60,10 +67,17 @@ export function formatMillisecondsToDateTime(milliseconds,isSet900) {
 
   // Format the date
   // const formattedDate = `${year}-${month}-${day}`;
+
   const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  
   // console.log("HI_______________________________________",formattedDate,isSet900)
 
+  if(isAgainStart)
+  {
+    console.warn(formattedDate)
+  }
 
-  console.log(formattedDate);
+
+  // console.log(formattedDate);
   return formattedDate.toString();
 }

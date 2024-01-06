@@ -54,7 +54,7 @@ const MainMenu = () => {
                     colorScheme: 'dark',
                     backgroundColor: 'black','& .MuiBottomNavigationAction-root': {
                         // Adjust the spacing between menu items here
-                        minWidth: 'auto'
+                        minWidth: "auto"
                     },
                     height:'60px'
                 }}
