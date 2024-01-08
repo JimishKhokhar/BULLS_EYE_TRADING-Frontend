@@ -11,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserCover = () => {
 
     const [userObject, setUserObject, isLoggedIn, setIsLoggedIn] = useContext(UserDataContext);
+    
 
     const { setSelectedComponent, successAlert, failAlert } = useContext(ComponentDataContext);
     const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
@@ -38,7 +39,7 @@ const UserCover = () => {
                         </div>
                             :
                             <div>
-                                <h1 className='text-3xl text-white text-center font-bold '>Login To Start Your Trading Journey!</h1>
+                                <h1 className='text-3xl text-white text-center  '>Login To Start Your Trading Journey!</h1>
                             </div>
 
                         }

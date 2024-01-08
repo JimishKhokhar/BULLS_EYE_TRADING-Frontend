@@ -10,9 +10,11 @@ import { useNavigate } from 'react-router-dom';
 
 const LandingComponent = () => {
     const { selectedComponent, setSelectedComponent } = useContext(ComponentDataContext);
+    
+  const { totalUsers, setTotalUsers } = useContext(ComponentDataContext)
     const navigate = useNavigate();
 
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, isAuthenticated ,isLoading } = useAuth0();
 
     useEffect(() => {
         document.title="Home"
@@ -54,6 +56,11 @@ const LandingComponent = () => {
 
 
                         </div>
+                        {
+                            isLoading ?<span className="mx-auto md:mx-0 text-lg md:text-xl text-white">Loading...</span>
+                            :
+                            totalUsers==-1 && isAuthenticated  && <span className="mx-auto md:mx-0 text-lg md:text-xl text-white">Fetching User Details...</span>
+                        }
                     </div>
                 </div>
 

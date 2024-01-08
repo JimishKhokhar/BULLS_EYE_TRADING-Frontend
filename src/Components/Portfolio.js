@@ -16,6 +16,8 @@ import BuyDialog from './BuyDialog'
 
 const Portfolio = () => {
 
+  const { totalUsers, setTotalUsers } = useContext(ComponentDataContext)
+
   const [innerComponent, setInnerComponent] = useState(0);
 
 
@@ -117,7 +119,7 @@ const Portfolio = () => {
   useEffect(() => {
 
 
-    document.title="Portfolio"
+    document.title = "Portfolio"
     setSelectedComponent("Portfolio");
     window.scrollTo(0, 0)
     if (!isLoggedIn)
@@ -125,7 +127,7 @@ const Portfolio = () => {
 
     setIsDataLoading(true)
 
-    
+
     findIt()
 
 
@@ -190,8 +192,7 @@ const Portfolio = () => {
   function findNetWorth() {
     let worth = 0;
 
-    if(allHoldings?.length==0)
-    {
+    if (allHoldings?.length == 0) {
       find();
       setNetworth(currentBalance);
       return;
@@ -270,8 +271,7 @@ const Portfolio = () => {
     console.log("Buying ", stockToBuy);
   }, [stockToBuy]);
 
-  async function updateHoldingCardForBuying()
-  {
+  async function updateHoldingCardForBuying() {
     await findIt();
   }
 
@@ -286,17 +286,17 @@ const Portfolio = () => {
         <div className=" pt-12 md:pt-0  w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
           <div className="flex justify-center w-full content-center min-h-[calc(100vh-61px)] p-3 md:p-5">
-            {isOpen==1 ? <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
+            {isOpen == 1 ? <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
               <SellDialog closeTheDialog={closeTheDialog} updateHoldingCard={updateHoldingCard} />
             </div>
               :
-              isOpen==2?
+              isOpen == 2 ?
                 <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
-                  <BuyDialog stockToBuy={stockToBuy} closeTheDialog={closeTheDialog}  
-                      updateHoldingCardForBuying={updateHoldingCardForBuying} />
+                  <BuyDialog stockToBuy={stockToBuy} closeTheDialog={closeTheDialog}
+                    updateHoldingCardForBuying={updateHoldingCardForBuying} />
                 </div>
-              :
-              <></>
+                :
+                <></>
 
             }
 
@@ -306,178 +306,187 @@ const Portfolio = () => {
 
 
               {
-                isDataLoading ?
+                totalUsers == -1 ?
                   <div className='flex self-center  mx-auto'>
                     <div className='flex align-center items-center  justify-center'>
-                      <span className=' text-lg md:text-3xl text-center p-2 md:p-10'>Data Loading...</span>
+                      <span className=' text-lg md:text-3xl text-center p-2 md:p-10'>Loading...</span>
                     </div>
-                  </div> :
+                  </div>
+                  :
 
 
-                  !isLoggedIn ?
-                    <div className='flex self-center '>
-                      <div className='flex flex-col items-center  justify-center'>
-                        <span className='m-auto text-lg md:text-3xl text-center flex flex-col gap-3 justify-center items-center'>
-                          <span className='m-auto text-lg md:text-3xl text-center'>Login To Trade</span>
-                          <Button
-                            variant="secondary"
-                            kind="elevated"
-                            size="big"
-                            colorMode="dark"
-                            textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
-
-                            onClick={loginWithRedirect} >Login</Button>
-                        </span>
+                  isDataLoading ?
+                    <div className='flex self-center  mx-auto'>
+                      <div className='flex align-center items-center  justify-center'>
+                        <span className=' text-lg md:text-3xl text-center p-2 md:p-10'>Data Loading...</span>
                       </div>
                     </div> :
 
-                    <div className='w-full h-full'>
 
-                      <div className='rounded-lg w-full md:w-[60%] mx-auto border-[2px] p-1 md:p-3 bg-slate-900 '>
+                    !isLoggedIn ?
+                      <div className='flex self-center '>
+                        <div className='flex flex-col items-center  justify-center'>
+                          <span className='m-auto text-lg md:text-3xl text-center flex flex-col gap-3 justify-center items-center'>
+                            <span className='m-auto text-lg md:text-3xl text-center'>Login To Trade</span>
+                            <Button
+                              variant="secondary"
+                              kind="elevated"
+                              size="big"
+                              colorMode="dark"
+                              textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
 
-                        <div>
-                          <div className='w-[80%] mx-auto  grid grid-cols-2 md:gap-0 gap-8  pb-2'>
-                            <div className='flex flex-col justify-center w-full  items-center  '>
-                              <span className='text-md md:text-2xl text-white self-center  font-bold'>Balance</span>
-                              <span className='text-2xl md:text-4xl font-bold text-green-600 self-center '> {"$" + Number(currentBalance).toLocaleString('en-IN', {
-                                maximumFractionDigits: 2,
-                                currency: 'INR'
-                              })}</span>
-                            </div>
-                            <div className='flex flex-col justify-center w-full  items-center '>
-                              <span className='text-md md:text-2xl text-white self-center  font-bold'>Net Worth</span>
+                              onClick={loginWithRedirect} >Login</Button>
+                          </span>
+                        </div>
+                      </div> :
 
-                              {
-                                !isShowProfit ? <span className='text-2xl md:text-2xl font-bold'>Loading...</span> : <span className='text-2xl md:text-4xl font-bold text-green-600 self-center '> {"$" + Number(netWorth).toLocaleString('en-IN', {
+                      <div className='w-full h-full'>
+
+                        <div className='rounded-lg w-full md:w-[60%] mx-auto border-[2px] p-1 md:p-3 bg-slate-900 '>
+
+                          <div>
+                            <div className='w-[80%] mx-auto  grid grid-cols-2 md:gap-0 gap-8  pb-2'>
+                              <div className='flex flex-col justify-center w-full  items-center  '>
+                                <span className='text-md md:text-2xl text-white self-center  font-bold'>Balance</span>
+                                <span className='text-2xl md:text-4xl font-bold text-green-600 self-center '> {"$" + Number(currentBalance).toLocaleString('en-IN', {
                                   maximumFractionDigits: 2,
                                   currency: 'INR'
                                 })}</span>
-                              }
+                              </div>
+                              <div className='flex flex-col justify-center w-full  items-center '>
+                                <span className='text-md md:text-2xl text-white self-center  font-bold'>Net Worth</span>
+
+                                {
+                                  !isShowProfit ? <span className='text-2xl md:text-2xl font-bold'>Loading...</span> : <span className='text-2xl md:text-4xl font-bold text-green-600 self-center '> {"$" + Number(netWorth).toLocaleString('en-IN', {
+                                    maximumFractionDigits: 2,
+                                    currency: 'INR'
+                                  })}</span>
+                                }
 
 
 
 
+
+
+                              </div>
 
 
                             </div>
+                          </div>
+                          <div className=' pt-2 border-t-2 flex flex-col justify-center max-w-[100%] mx-auto'>
+                            <span className='text-md md:text-2xl text-white self-center  font-bold'>P & L</span>
+                            {
+                              !isShowProfit ? <span className='text-2xl font-bold mx-auto'>Loading...</span> :
+                                Number(netWorth) - 25000 >= 0 ?
+                                  <span className='text-2xl md:text-4xl font-bold text-green-600 self-center '> {"+ $" + (Number(netWorth) - 25000).toLocaleString('en-IN', {
+                                    minimumFractionDigits: 3,
+                                    maximumFractionDigits: 3,
+                                    currency: 'INR'
+                                  })}</span> :
+                                  <span className='text-2xl md:text-4xl font-bold text-red-500 self-center '>{"- $" + (25000 - Number(netWorth)).toLocaleString('en-IN', {
+                                    maximumFractionDigits: 2,
+                                    currency: 'INR'
+                                  })}</span>
 
+                            }
+                          </div>
+
+
+
+                        </div>
+
+                        <div className='dont-blink select-none mx-auto grid grid-cols-2 gap-3 w-full md:min-w-[50%] md:max-w-[50%] m-3 transition-all duration-500'>
+                          <div className=''>
+                            {
+                              innerComponent == 0 ?
+                                <div className='bg-black w-full rounded-lg border-2  box-border font-bold border-white h-fit flex justify-center cursor-pointer transition-all duration-500'>
+                                  <span className='text-2xl md:p-4 py-2 mx-auto'>ACTIVE</span>
+                                </div> :
+                                <div onClick={() => { setInnerComponent(0) }} className='bg-slate-800 w-full rounded-lg h-fit border-2 border-black  flex justify-center cursor-pointer transition-all duration-500'>
+                                  <span className='text-2xl md:p-4 py-2  mx-auto'>ACTIVE</span>
+                                </div>
+
+                            }
+                          </div>
+
+                          <div>
+                            {
+                              innerComponent == 1 ?
+                                <div className='bg-black w-full rounded-lg border-2 box-border font-bold border-white h-fit flex justify-center cursor-pointer transition-all duration-500'>
+                                  <span className='text-2xl md:p-4 py-2  mx-auto'>HISTORY</span>
+                                </div> :
+                                <div onClick={() => { setInnerComponent(1) }} className='bg-slate-800 w-full rounded-lg h-fit border-2 border-black  flex justify-center cursor-pointer transition-all duration-500'>
+                                  <span className='text-2xl md:p-4 py-2  mx-auto'>HISTORY</span>
+                                </div>
+
+                            }
 
                           </div>
-                        </div>
-                        <div className=' pt-2 border-t-2 flex flex-col justify-center max-w-[100%] mx-auto'>
-                          <span className='text-md md:text-2xl text-white self-center  font-bold'>P & L</span>
-                          {
-                            !isShowProfit ? <span className='text-2xl font-bold mx-auto'>Loading...</span> :
-                              Number(netWorth) - 25000 >= 0 ?
-                                <span className='text-2xl md:text-4xl font-bold text-green-600 self-center '> {"+ $" + (Number(netWorth) - 25000).toLocaleString('en-IN', {
-                                  minimumFractionDigits: 3,
-                                  maximumFractionDigits: 3,
-                                  currency: 'INR'
-                                })}</span> :
-                                <span className='text-2xl md:text-4xl font-bold text-red-500 self-center '>{"- $" + (25000 - Number(netWorth)).toLocaleString('en-IN', {
-                                  maximumFractionDigits: 2,
-                                  currency: 'INR'
-                                })}</span>
 
-                          }
+
                         </div>
 
 
 
-                      </div>
-
-                      <div className='dont-blink select-none mx-auto grid grid-cols-2 gap-3 w-full md:min-w-[50%] md:max-w-[50%] m-3 transition-all duration-500'>
-                        <div className=''>
-                          {
-                            innerComponent == 0 ?
-                              <div className='bg-black w-full rounded-lg border-2  box-border font-bold border-white h-fit flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl md:p-4 py-2 mx-auto'>ACTIVE</span>
-                              </div> :
-                              <div onClick={() => { setInnerComponent(0) }} className='bg-slate-800 w-full rounded-lg h-fit border-2 border-black  flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl md:p-4 py-2  mx-auto'>ACTIVE</span>
-                              </div>
-
-                          }
-                        </div>
-
-                        <div>
-                          {
-                            innerComponent == 1 ?
-                              <div className='bg-black w-full rounded-lg border-2 box-border font-bold border-white h-fit flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl md:p-4 py-2  mx-auto'>HISTORY</span>
-                              </div> :
-                              <div onClick={() => { setInnerComponent(1) }} className='bg-slate-800 w-full rounded-lg h-fit border-2 border-black  flex justify-center cursor-pointer transition-all duration-500'>
-                                <span className='text-2xl md:p-4 py-2  mx-auto'>HISTORY</span>
-                              </div>
-
-                          }
-
-                        </div>
-
-
-                      </div>
 
 
 
-
-
-
-                      {
-                        innerComponent == 0 ?
-                          holdingsLoading ?
-                            <div className='w-full h-[60%]  flex '>
-                              <div className=' self-center   m-auto flex justify-center flex-col items-center'>
-                                <span className=' text-2xl p-3 md:text-3xl text-center'>Loading...</span>
-                              </div>
-                            </div>
-                            :
-                            allHoldings.length == 0 ?
+                        {
+                          innerComponent == 0 ?
+                            holdingsLoading ?
                               <div className='w-full h-[60%]  flex '>
                                 <div className=' self-center   m-auto flex justify-center flex-col items-center'>
-                                  <span className=' text-2xl p-3 md:text-3xl text-center'>Start Trading !</span>
-                                  <Button
-                                    variant="secondary"
-                                    kind="elevated"
-                                    size="big"
-                                    colorMode="dark"
-                                    textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
-
-                                  >Stocks</Button>
+                                  <span className=' text-2xl p-3 md:text-3xl text-center'>Loading...</span>
                                 </div>
                               </div>
-
                               :
+                              allHoldings.length == 0 ?
+                                <div className='w-full h-[60%]  flex '>
+                                  <div className=' self-center   m-auto flex justify-center flex-col items-center'>
+                                    <span className=' text-2xl p-3 md:text-3xl text-center'>Start Trading !</span>
+                                    <Button
+                                      variant="secondary"
+                                      kind="elevated"
+                                      size="big"
+                                      colorMode="dark"
+                                      textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
 
-                              <div className='flex flex-col gap-2 mt-2 md:mt-5'>
-                                {allHoldings?.map((holding, index) => (
-                                  <HoldingCard
-                                    isOpen={isOpen}
-                                    setIsOpen={setIsOpen}
-                                    holdingObject={holding}//click on buy more to check holding id
-                                    id={holding._id}
-                                    user_id={holding.user_id}
-                                    stock={holding.stock}
-                                    totalPrice={holding.totalPrice.$numberDecimal}
-                                    quantity={holding.quantity.$numberDecimal}
-                                    broughtAt={holding.broughtAt}
-                                    livePrices={livePrices}
-                                    isPricesLoading={!isShowProfit}
-                                    setStockToBuy={setStockToBuy}
+                                    >Stocks</Button>
+                                  </div>
+                                </div>
 
-                                  />
-                                ))}
-                              </div>
-                          :
-                          <div className='w-full '>
-                            <TradeHistory />
-                          </div>
+                                :
 
-                      }
+                                <div className='flex flex-col gap-2 mt-2 md:mt-5'>
+                                  {allHoldings?.map((holding, index) => (
+                                    <HoldingCard
+                                      isOpen={isOpen}
+                                      setIsOpen={setIsOpen}
+                                      holdingObject={holding}//click on buy more to check holding id
+                                      id={holding._id}
+                                      user_id={holding.user_id}
+                                      stock={holding.stock}
+                                      totalPrice={holding.totalPrice.$numberDecimal}
+                                      quantity={holding.quantity.$numberDecimal}
+                                      broughtAt={holding.broughtAt}
+                                      livePrices={livePrices}
+                                      isPricesLoading={!isShowProfit}
+                                      setStockToBuy={setStockToBuy}
+
+                                    />
+                                  ))}
+                                </div>
+                            :
+                            <div className='w-full '>
+                              <TradeHistory />
+                            </div>
+
+                        }
 
 
 
-                      {/* <div className='text-white'>{userObject.username}</div> */}
-                    </div>
+                        {/* <div className='text-white'>{userObject.username}</div> */}
+                      </div>
               }
 
             </div>

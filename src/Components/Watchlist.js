@@ -12,6 +12,7 @@ const Watchlist = () => {
 
 
   const [isLoading, setIsLoading] = useState(true);
+  const { totalUsers, setTotalUsers } = useContext(ComponentDataContext)
 
 
 
@@ -87,42 +88,50 @@ const Watchlist = () => {
       }
 
       {
-
-
-        !isLoggedIn ?
+        totalUsers == -1 ?
           <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
             <span className='m-auto text-lg md:text-3xl text-center flex flex-col justify-center items-center gap-3'>
-              <span className='m-auto text-lg md:text-3xl text-center'>Login To Use WatchList</span>
-              <Button
-                variant="secondary"
-                kind="elevated"
-                size="big"
-                colorMode="dark"
-                textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
-
-                onClick={loginWithRedirect} >Login</Button>
+              <span className='m-auto text-lg md:text-3xl text-center'>Loading...</span>
             </span>
           </div>
           :
-          isLoading ?
-            <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 max-h-[calc(100vh-61px)] md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
-              <span className='m-auto text-2xl md:text-2xl text-center'>Loading...</span>
+
+
+
+          !isLoggedIn ?
+            <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
+              <span className='m-auto text-lg md:text-3xl text-center flex flex-col justify-center items-center gap-3'>
+                <span className='m-auto text-lg md:text-3xl text-center'>Login To Use WatchList</span>
+                <Button
+                  variant="secondary"
+                  kind="elevated"
+                  size="big"
+                  colorMode="dark"
+                  textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
+
+                  onClick={loginWithRedirect} >Login</Button>
+              </span>
             </div>
             :
-
-            Watchlist.length == 0 ?
+            isLoading ?
               <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 max-h-[calc(100vh-61px)] md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
-                <span className='m-auto text-lg md:text-3xl text-center'>No Stocks...</span>
-              </div> :
-              <div className='min-h-4/5  min-h-[calc(100vh-61px)]  mt-1'>
-                {
-                  Watchlist.map((item) => {
-                    return (
-                      <div className='transition-all duration-500 '><WatchlistCard deleteFromLocal={deleteFromLocal} item={item} setIsOpen={setIsOpen} setStockToBuy={setStockToBuy} /></div>
-                    )
-                  })
-                }
+                <span className='m-auto text-2xl md:text-2xl text-center'>Loading...</span>
               </div>
+              :
+
+              Watchlist.length == 0 ?
+                <div className={`  flex justify-center  md:max-w-[60%] min-h-4/5  min-h-[calc(100vh-61px)] max-h-4/5 max-h-[calc(100vh-61px)] md:min-w-[60%] w-full   content-center   self-center max-h-[calc(100vh-61px)]  mx-auto p-3 md:p-5`}>
+                  <span className='m-auto text-lg md:text-3xl text-center'>No Stocks...</span>
+                </div> :
+                <div className='min-h-4/5  min-h-[calc(100vh-61px)]  mt-1'>
+                  {
+                    Watchlist.map((item) => {
+                      return (
+                        <div className='transition-all duration-500 '><WatchlistCard deleteFromLocal={deleteFromLocal} item={item} setIsOpen={setIsOpen} setStockToBuy={setStockToBuy} /></div>
+                      )
+                    })
+                  }
+                </div>
       }
     </div >
   )

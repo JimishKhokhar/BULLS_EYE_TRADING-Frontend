@@ -56,7 +56,7 @@ const TradeHistory = () => {
   return (
     <div className="pt-[5px]  min-w-[100%] overflow-hidden   text-white">
 
-      <div className={`  flex justify-center   w-full   content-center   ${isLoggedIn || tradeHistory?.length == 0 ? "min-h-4/5  min-h-[calc(70vh-61px)] max-h-4/5" : "self-center max-h-[calc(70vh-61px)] min-h-[calc(100vh-61px)]"}  mx-auto  md:p-5`}>
+      <div className={`  flex justify-center   w-full   content-center   ${isLoggedIn || tradeHistory?.length == 0 ? "min-h-4/5  min-h-[calc(70vh-61px)] max-h-4/5" : "self-center max-h-[calc(70vh-61px)] min-h-[calc(100vh-61px)]"}  mx-auto  md:px-5`}>
         <div className={` ${isLoggedIn || tradeHistory?.length == 0 ? "min-h-4/5  max-h-4/5" : "self-center min-h-4/5"}   flex justify-center content-center w-full  align-middle `}>
           <div className={` w-full   ${isLoggedIn || tradeHistory?.length == 0 ? "" : "self-center "}  `}>
 
