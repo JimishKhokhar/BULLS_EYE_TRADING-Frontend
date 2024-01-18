@@ -10,6 +10,7 @@ import { updateNetWorth } from '../utils'
 import { useAuth0 } from '@auth0/auth0-react'
 import TradeHistory from './TradeHistory'
 import BuyDialog from './BuyDialog'
+import ShortDialog from './ShortDialog'
 
 
 
@@ -267,6 +268,10 @@ const Portfolio = () => {
   }
 
   const [stockToBuy, setStockToBuy] = useState("");
+  const [tradeTypeToExit,setTradeTypeToExit]=useState("");
+  const [avgPricePortfolio,setAvgPricePortfolio]=useState(0);
+
+
   useEffect(() => {
     console.log("Buying ", stockToBuy);
   }, [stockToBuy]);
@@ -287,7 +292,7 @@ const Portfolio = () => {
 
           <div className="flex justify-center w-full content-center min-h-[calc(100vh-61px)] p-3 md:p-5">
             {isOpen == 1 ? <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
-              <SellDialog closeTheDialog={closeTheDialog} updateHoldingCard={updateHoldingCard} />
+              <SellDialog closeTheDialog={closeTheDialog} updateHoldingCard={updateHoldingCard} tradeTypeToExit={tradeTypeToExit} avgPricePortfolio={avgPricePortfolio}/>
             </div>
               :
               isOpen == 2 ?
@@ -296,7 +301,12 @@ const Portfolio = () => {
                     updateHoldingCardForBuying={updateHoldingCardForBuying} />
                 </div>
                 :
-                <></>
+              isOpen==3 ?
+              <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
+                  <ShortDialog stockToShort={stockToBuy} closeTheDialog={closeTheDialog}
+                    updateHoldingCardForBuying={updateHoldingCardForBuying} />
+              </div>
+              :<></>
 
             }
 
@@ -472,7 +482,8 @@ const Portfolio = () => {
                                       livePrices={livePrices}
                                       isPricesLoading={!isShowProfit}
                                       setStockToBuy={setStockToBuy}
-
+                                      setTradeTypeToExit={setTradeTypeToExit}
+                                      setAvgPricePortfolio={setAvgPricePortfolio}
                                     />
                                   ))}
                                 </div>

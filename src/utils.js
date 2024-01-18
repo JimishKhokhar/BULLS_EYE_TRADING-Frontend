@@ -84,7 +84,7 @@ export async function getStockQuote(stock) {
 
 
 
-export async function buyStock(user_id, stock, price, quantity, time) {
+export async function buyStock(user_id, stock, price, quantity, time,type="B") {
     // console.log(userObject)
     // alert(`Buying ${stock} for ${price} \n Quantity:${quantity}\n Total Value:${Number(price*quantity).toFixed(2)}`);
     // return 0;
@@ -92,10 +92,11 @@ export async function buyStock(user_id, stock, price, quantity, time) {
         return 0;
     else {
 
+        console.error(arguments)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/buyStock`, {
             method: "POST",
             body: JSON.stringify({
-                user_id, stock, quantity, price, time
+                user_id, stock, quantity, price, time,type
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -114,21 +115,21 @@ export async function buyStock(user_id, stock, price, quantity, time) {
 
 
 
-export async function sellTheStock(holdingIdToSell, sellingPrice, quantityToSell, time)//returns 0 or 1 as per the status of completion of selling the stock
+export async function sellTheStock(holdingIdToSell, sellingPrice, quantityToSell, time,tradeTypeToExit)//returns 0 or 1 as per the status of completion of selling the stock
 {
 
     //id means _id of holding
-    console.log(holdingIdToSell, sellingPrice, quantityToSell);
+    console.log(holdingIdToSell, sellingPrice, quantityToSell,tradeTypeToExit);
     // return;
 
-    if (!holdingIdToSell || !sellingPrice || !quantityToSell)
+    if (!holdingIdToSell || !sellingPrice || !quantityToSell || !tradeTypeToExit)
         return -3;
     else {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/sellStock`, {
                 method: "POST",
                 body: JSON.stringify({
-                    holdingIdToSell, sellingPrice, quantityToSell, time
+                    holdingIdToSell, sellingPrice, quantityToSell, time,tradeTypeToExit
                 }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"

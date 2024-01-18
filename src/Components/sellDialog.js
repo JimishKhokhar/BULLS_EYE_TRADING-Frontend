@@ -15,6 +15,10 @@ const SellDialog = (props) => {
   //Market Status Checker
   const isMarketLive = useMarketTimeChecker();
 
+  const tradeTypeToExit = props.tradeTypeToExit;
+  const avgPrice = props.avgPricePortfolio;
+
+
 
 
   const [stockQuote, setStockQuote] = useState({});
@@ -68,10 +72,7 @@ const SellDialog = (props) => {
       <div className='w-full flex flex-col align-middle items-center'>
         <span className=' text-3xl font-bold text-slate-400 m-2'>{stockToSell}</span>
         <span className='text-3xl m-2 font-extrabold text-emerald-500 select-none '>$ {Number(stockQuote?.c).toFixed(3)}</span>
-        {/* <div className='w-full flex  justify-around my-2 text-2xl select-none '>
-            <div><span className='font-bold'>Low: </span><span className=' p-1  bg-red-600 rounded-md'>${Number(stockQuote.l).toFixed(2)}</span></div>
-            <div><span className='font-bold'>High: </span><span className=' p-1  bg-green-600 rounded-md'>${Number(stockQuote.h).toFixed(2)}</span></div>
-          </div> */}
+        
 
         <span className='text-3xl mt-10 select-none '>Quantity</span>
         <div className='flex gap-5 text-2xl mt-4 select-none '>
@@ -123,8 +124,13 @@ const SellDialog = (props) => {
         <div className='absolute w-full flex flex-col  justify-center gap-5 bottom-0 select-none '>
 
           {
-            quantityToSell > (maxQuantityToSell) ? <span className=' self-center text-4xl font-bold text-indigo-500 opacity-60'>$ {Number(quantityToSell * stockQuote.c).toFixed(2)}</span> :
-              <span className=' self-center text-4xl font-bold text-indigo-500'>$ {Number(quantityToSell * stockQuote.c).toFixed(3)}</span>
+            tradeTypeToExit == "B" ?
+              quantityToSell > (maxQuantityToSell) ? <span className=' self-center text-4xl font-bold text-indigo-500 opacity-60'>$ {Number(quantityToSell * stockQuote.c).toFixed(2)}</span> :
+                <span className=' self-center text-4xl font-bold text-indigo-500'>$ {Number(quantityToSell * stockQuote.c).toFixed(3)}</span>
+              :
+              quantityToSell > (maxQuantityToSell) ? <span className=' self-center text-4xl font-bold text-indigo-500 opacity-60'>$ {Number(2 * (Number(avgPrice) * Number(quantityToSell)) - (Number(stockQuote.c) * Number(quantityToSell))).toFixed(2)}</span> :
+                <span className=' self-center text-4xl font-bold text-indigo-500'>$ {Number(2 * (Number(avgPrice) * Number(quantityToSell)) - (Number(stockQuote.c) * Number(quantityToSell))).toFixed(2)}</span>
+
 
           }
 
@@ -157,7 +163,7 @@ const SellDialog = (props) => {
 
               setFreezeOperations(true);
 
-              const result = await sellTheStock(holdingIdToSell, Number(stockQuote?.c), quantityToSell, new Date());
+              const result = await sellTheStock(holdingIdToSell, Number(stockQuote?.c), quantityToSell, new Date(), tradeTypeToExit);
               console.log("back to sell Dialog with result ", result)
               if (result == 1) {
                 successAlert(`Successfully Sold ${quantityToSell} Units of ${stockToSell}`);
@@ -172,7 +178,7 @@ const SellDialog = (props) => {
 
 
 
-            }}>SELL</Button>
+            }}>EXIT</Button>
         </div>
 
 

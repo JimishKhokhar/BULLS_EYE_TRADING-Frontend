@@ -13,6 +13,7 @@ import { formatMillisecondsToDateTime } from "../Utility";
 
 import LiveNow from "../Images/live-now.gif"
 import NotLive from "../Images/not-allowed-symbol-svgrepo-com.svg"
+import ShortDialog from "./ShortDialog";
 
 
 import useMarketTimeChecker from "./marketTimeChecker";
@@ -90,7 +91,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // return;
 
     const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-    
+
     if (!response.ok)
       return;
 
@@ -124,17 +125,16 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // return;
 
 
-    let queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime,buttonSelected==0,false)}&end_date=${formatMillisecondsToDateTime(endTime,false,false)}&symbol=${currentStock}&format=JSON`;
+    let queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime, buttonSelected == 0, false)}&end_date=${formatMillisecondsToDateTime(endTime, false, false)}&symbol=${currentStock}&format=JSON`;
     let response = await fetch(queryString);
     // console.log(queryString)
 
     // let temp=await response.json();
     let pureData = await response.json();
     console.log("From 12 Data", pureData);
-    if(pureData.code==400)
-    {
+    if (pureData.code == 400) {
       console.warn("Errir")
-      queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime-106400,buttonSelected==0,true)}&end_date=${formatMillisecondsToDateTime(endTime,false,false)}&symbol=${currentStock}&format=JSON`;
+      queryString = `https://api.twelvedata.com/time_series?apikey=${process.env.REACT_APP_API_KEY_12_DATA}&interval=${res}&previous_close=true&start_date=${formatMillisecondsToDateTime(startTime - 106400, buttonSelected == 0, true)}&end_date=${formatMillisecondsToDateTime(endTime, false, false)}&symbol=${currentStock}&format=JSON`;
       response = await fetch(queryString);
       pureData = await response.json();
       console.log("From 12 Data", pureData);
@@ -152,7 +152,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // console.log(response);
     // console.log("Jimish")
 
-    
+
 
 
     // if (pureData['s'] == "no_data") {
@@ -214,7 +214,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
               return datetime.getFullYear().toString();
             case 5:
               return datetime.getFullYear().toString();
-              case 6:
+            case 6:
               return datetime.getFullYear().toString();
             default:
               return '';
@@ -255,9 +255,9 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     setStockProfile(pureData);
   }
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(0);
   function closeTheDialog() {
-    setIsOpen(false);
+    setIsOpen(0);
   }
 
   //Add to Watchlist
@@ -290,10 +290,18 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
             <Sidebar />
           </div>
 
-          {isOpen ? <div className=' w-[100vw]   md:w-fit  fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
-            <Dialog stock={currentStock} closeTheDialog={() => { closeTheDialog() }} />
-          </div>
-            : <></>}
+          {isOpen == 1 ?
+            <div className=' w-[100vw]   md:w-fit  fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
+              <Dialog stock={currentStock} closeTheDialog={() => { closeTheDialog() }} />
+            </div>
+            :
+            isOpen == 2 ?
+              <div className=' w-[100vw]   md:w-fit  fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
+                <ShortDialog stockToShort={currentStock} closeTheDialog={() => { closeTheDialog() }} />
+
+              </div>
+              : <></> 
+          }
 
 
           {/* Main DashBoard */}
@@ -504,14 +512,10 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
                   // className="  mr-2  bg-[#008000] px-5 py-2 text-2xl font-bold " 
                   onClick={() => {
                     if (!isLoggedIn) {
-                      // alert("Please Login before Trading!");
                       infoAlert("Please Login before Trading!", 'top-center')
-                      // navigate('/login');
                       return;
                     }
-                    setIsOpen(true);
-                    // alert(`${currentStock} is Purchased `)
-                    // infoAlert(`${currentStock} is Purchased `,'top-center')
+                    setIsOpen(1);
                   }}><span>BUY</span></Button>
                 <Button
                   variant="secondary"
@@ -524,16 +528,12 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
                   textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
 
 
-                  // className="  mr-8  bg-[#EF0107] px-5 py-2 text-2xl font-bold "
                   onClick={() => {
                     if (!isLoggedIn) {
-                      // alert("Please Login before Trading!");
                       infoAlert("Please Login before Trading!", 'top-center')
-                      // navigate('/login');
                       return;
                     }
-                    // alert(`${currentStock} is Sold! `)
-                    infoAlert(`Short Selling will be Available Soon! `, 'top-center');
+                    setIsOpen(2)
                   }}><span>SELL</span></Button>
               </div>
 

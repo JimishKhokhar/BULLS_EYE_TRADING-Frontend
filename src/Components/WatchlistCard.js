@@ -77,7 +77,7 @@ const WatchlistCard = ({ item, setIsOpen, setStockToBuy ,deleteFromLocal }) => {
     return (
         <div>
 
-            <div className='p-2'>
+            <div className='md:p-2 px-2 py-1'>
 
                 <div className=' p-2 flex justify-start md:p-4  flex-col w-full md:max-w-[50%] bg-slate-700 mx-auto rounded-lg '>
                     <div className='text-2xl md:text-3xl  overflow-hidden w-full bg-black md:bg-slate-700  font-bold shadow-custom rounded-lg  pb-1  flex justify-center md:justify-between gap-3 '>
@@ -85,7 +85,7 @@ const WatchlistCard = ({ item, setIsOpen, setStockToBuy ,deleteFromLocal }) => {
                         <span className='text-gray-400 hidden md:block'>{item.stockSymbol}</span>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-1  w-full text-xl z-20  py-2  items-center  md:px-5">
+                    <div className="grid grid-cols-3 gap-1  w-full text-xl z-20    items-center  md:px-5">
                         <div className=' self-center flex flex-col md:flex-row items-baseline md:gap-3 ' >
                             <div className='w-full md:w-fit text-center  '>Low </div>
                             <span className='hidden md:inline'>→</span>

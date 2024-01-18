@@ -12,14 +12,22 @@ const moment = require('moment-timezone');
 
 
 
-const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, livePrices, holdingObject, id, user_id, isOpen, setIsOpen
-    ,setStockToBuy
+const HoldingCard = ({ isPricesLoading, setTradeTypeToExit, stock, totalPrice, quantity, broughtAt, livePrices, holdingObject, id, user_id, isOpen, setIsOpen
+    , setStockToBuy, setAvgPricePortfolio
 }) => {
 
     //History Object variables
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
-    
+    //Trade Type
+    const tradeType = holdingObject?.holdingType;
+    let tradeTypeDisplay = "";
+    if (tradeType == "S")
+        tradeTypeDisplay = "SELL"
+    else tradeTypeDisplay = "BUY"
+
+
+
 
 
 
@@ -27,9 +35,22 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
     const avgPrice = totalPrice / quantity
 
-    const marketValue = Number(quantity * livePrices[stock]);
-    const gainLoss = Number(quantity * (livePrices[stock] - avgPrice)).toFixed(2);
-    const returnPercentage = ((gainLoss / (quantity * avgPrice)) * 100).toFixed(2);
+    //calculating market value and returns as per the trade type 
+    let marketValue;
+    let gainLoss;
+    let returnPercentage;
+    if (tradeType == "B") {
+        marketValue = Number(quantity * livePrices[stock]);
+        gainLoss = Number(quantity * (livePrices[stock] - avgPrice)).toFixed(2);
+        returnPercentage = ((gainLoss / (quantity * avgPrice)) * 100).toFixed(2);
+    }
+    else {
+        marketValue = (2 * (Number(avgPrice) * Number(quantity)) - (Number(livePrices[stock]) * Number(quantity)));
+        gainLoss = Number(quantity * (avgPrice - livePrices[stock])).toFixed(2);
+        returnPercentage = ((gainLoss / (quantity * avgPrice)) * 100).toFixed(2);
+    }
+
+
 
     const { successAlert, failAlert, infoAlert, stockToSell, setStockToSell, maxQuantityToSell, setMaxQuantityToSell
         , holdingIdToSell, setHoldingIdToSell } = useContext(ComponentDataContext);
@@ -39,11 +60,14 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
 
     return (
-        <div className={ ` select-none overflow-hidden holding-card text-white bg-slate-700 min-w-full max-w-full rounded-md  md:px-10 transition-all duration-300 ${isOpen ? 'md:pr-28' : ''} `}>
+        <div className={` select-none overflow-hidden holding-card text-white bg-slate-700 min-w-full max-w-full rounded-md  md:px-10 transition-all duration-300 ${isOpen ? 'md:pr-28' : ''} `}>
             <div className={`flex justify-start p-2 md:p-3   flex-col `}>
-                <div className='text-2xl md:text-3xl  w-full  bg-black md:bg-slate-700  font-bold shadow-custom rounded-lg pb-1 md:pb-2  flex justify-center md:justify-start' onClick={() => { setIsOpen(!isOpen) }}>
-                    <span className=' text-white  md:px-3  md:py-1 mt-1 bg-black rounded-lg'>{stock}</span>
-                    
+                <div className='text-2xl md:text-3xl  relative w-full  bg-black md:bg-slate-700  font-bold  rounded-lg pb-1 md:pb-2  flex justify-center md:justify-start' onClick={() => { setIsOpen(!isOpen) }}>
+
+                    <span className=' text-white  md:px-3  md:py-1 mt-1 bg-black rounded-lg shadow-custom'>{stock}</span>
+
+                    <span className={` mt-[6px] rounded-lg  ${tradeType == "S" ? 'bg-red-600' : 'bg-green-600'}  opacity-90 text-white text-lg mx-3 px-2 absolute  right-0`}>{tradeTypeDisplay}</span>
+
                 </div>
 
                 <div className="grid grid-cols-3 gap-1 md:gap-4 w-full text-xl z-20 ">
@@ -66,7 +90,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                         <span className='hidden md:inline'>→</span>
                         <div className='text-md md:text-2xl font-bold w-full md:w-fit text-center'>
                             {
-                                isPricesLoading ? "Loading.." : stock in livePrices ?"$"+ livePrices[stock] : "---"
+                                isPricesLoading ? "Loading.." : stock in livePrices ? "$" + livePrices[stock] : "---"
 
                             }
                         </div>
@@ -110,7 +134,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                                 <span className='hidden md:inline'>→</span>
                                 <div className='text-md md:text-2xl text-red-500 font-bold w-full md:w-fit text-center'>
                                     {
-                                        isPricesLoading ? <span className='text-white'>Loading...</span> : stock in livePrices ?"- $" + Math.abs(gainLoss).toLocaleString('en-IN', {
+                                        isPricesLoading ? <span className='text-white'>Loading...</span> : stock in livePrices ? "- $" + Math.abs(gainLoss).toLocaleString('en-IN', {
                                             maximumFractionDigits: 2,
                                             currency: 'INR'
                                         }) : "---"
@@ -127,7 +151,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                                 <span className='hidden md:inline'>→</span>
                                 <span className='mx-auto text-md md:text-2xl font-bold text-green-400 flex'>
                                     {
-                                        !isPricesLoading ? "+"+returnPercentage.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' }) : "---"
+                                        !isPricesLoading ? "+" + returnPercentage.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' }) : "---"
                                     }%
                                     <img src={upward} className='w-[20px]' />
                                 </span>
@@ -136,11 +160,11 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                             <div className=' self-center md:ml-auto flex flex-col md:flex-row items-baseline md:gap-3' >
                                 <div className='w-full md:w-fit text-center text-lg md:text-xl'>Returns  </div>
                                 <span className='hidden md:inline'>→</span>
-                                 <span className='mx-auto text-md md:text-2xl font-bold text-red-500 flex  items-center justify-center align-middle'> {
-                                !isPricesLoading ? returnPercentage.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' }) : "---"
+                                <span className='mx-auto text-md md:text-2xl font-bold text-red-500 flex  items-center justify-center align-middle'> {
+                                    !isPricesLoading ? returnPercentage.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' }) : "---"
                                 }%
-                                <img src={downward} className='w-[20px]' />
-                                 </span>
+                                    <img src={downward} className='w-[20px]' />
+                                </span>
 
                             </div>
                     }
@@ -170,7 +194,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                             }}
                         >History</Button>
                     </div>
-                    <div className={`grid grid-cols-2 gap-2 md:gap-4 mt-2  transition-all duration-300 -mr-10 `} >
+                    <div className={`grid grid-cols-2 gap-2 md:gap-4 mt-2  transition-all duration-300 -mr-6`} >
 
                         <Button
 
@@ -184,12 +208,22 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
                             className=' py-1 bg-green-700 text-xl font-bold '
                             onClick={() => {
-                                    
-                                setIsOpen(2);
+
                                 setStockToBuy(stock);
-                                
+                                if (tradeType == "B")
+                                {
+                                    setIsOpen(2);
+                                }
+                                else {
+                                    setIsOpen(3);
+                                }
+
+
+
                             }}
-                        >Buy More</Button>
+                        >{
+                                tradeType == "B" ? "Buy More" : "Sell More"
+                            }</Button>
                         <Button
 
                             textStyle={{ fontWeight: 'bold', fontSize: '15', fontType: 'Josefin Sans' }}
@@ -206,6 +240,9 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                                 setHoldingIdToSell(id);
                                 setStockToSell(stock);
                                 setMaxQuantityToSell(quantity);
+                                setTradeTypeToExit(holdingObject.holdingType);
+                                setAvgPricePortfolio(avgPrice);
+
 
 
                                 setIsOpen(1);
@@ -213,7 +250,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
 
 
                             }}
-                        >Sell</Button>
+                        >EXIT</Button>
                     </div>
 
                 </div>
@@ -229,8 +266,7 @@ const HoldingCard = ({ isPricesLoading, stock, totalPrice, quantity, broughtAt, 
                                 reversedTrades.map((trade) => {
 
                                     return (
-                                        <span className='text-lg font-bold  px-3 p-1 rounded-md' style={{border:"2px solid white"}}>{`${trade.tradeType == 'S' ? "Sold" : "Bought"} ${trade.quantity} Stock${trade.quantity > 1 ? "s" : ""} at Price ${Number(trade.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })} on ${new Date(trade.tradeTime).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }).toString()}`}</span>
-
+                                        <span className='text-lg font-bold  px-3 p-1 rounded-md bg-slate-800' style={{ border: "2px solid white" }}>{`${trade.tradeType == 'BB' ? "Bought" : trade.tradeType == 'BS' ? "Short Sell" : trade.tradeType == 'SB' ? "Exit (Type:B)" : "Exit (Type:S)"} ${trade.quantity} Stock${trade.quantity > 1 ? "s" : ""} at Price ${Number(trade.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })} on ${new Date(trade.tradeTime).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }).toString()}`}</span>
                                     )
 
                                 })

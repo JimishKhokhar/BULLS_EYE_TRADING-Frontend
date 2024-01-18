@@ -54,7 +54,7 @@ const TradeHistory = () => {
   }, [tradeHistory])
 
   return (
-    <div className="pt-[5px]  min-w-[100%] overflow-hidden   text-white">
+    <div className="md:pt-[5px]  min-w-[100%] overflow-hidden   text-white">
 
       <div className={`  flex justify-center   w-full   content-center   ${isLoggedIn || tradeHistory?.length == 0 ? "min-h-4/5  min-h-[calc(70vh-61px)] max-h-4/5" : "self-center max-h-[calc(70vh-61px)] min-h-[calc(100vh-61px)]"}  mx-auto  md:px-5`}>
         <div className={` ${isLoggedIn || tradeHistory?.length == 0 ? "min-h-4/5  max-h-4/5" : "self-center min-h-4/5"}   flex justify-center content-center w-full  align-middle `}>
@@ -79,8 +79,7 @@ const TradeHistory = () => {
                 isLoading ?
                   <div className='w-full h-full   '>
                     <div className={`flex flex-col  justify-center  h-full m-auto `}>
-                      <span className='text-3xl p-10 text-center'>Loading...</span>
-
+                      <span className=' text-lg  md:text-3xl p-10 text-center'>Loading...</span>
                     </div>
                   </div> :
 
@@ -110,22 +109,36 @@ const TradeHistory = () => {
 
                             :
                             tradeHistory?.map((trade) => {
+
+                              let returns=trade.tradeReturn;
+                              
+
                               return (
-                                <div className='max-w-full  flex flex-col md:gap-3 md:my-1  p-3 px-3 md:px-5 shadow-custom-box rounded-md min-w-full bg-slate-700'>
+                                <div className='max-w-full  flex flex-col md:gap-3 md:my-1  md:p-3 p-1 px-3 md:px-5  rounded-md min-w-full bg-slate-700'>
                                   <div className='flex justify-between w-full  items-center'>
                                     <span className='text-2xl font-bold text-bold shadow-custom'>{trade.stock}</span>
                                     <span className='text-lg '>{new Date(trade.tradeTime).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }).toString()}</span>
                                   </div>
                                   <div className='flex md:flex-row flex-col  text-lg md:text-2xl  md:justify-between'>
-                                    <span className='  text-white'>{`${trade.tradeType == 'S' ? "Sold" : "Bought"} ${Number(trade.quantity).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0, currency: 'INR' })} Stock${trade.quantity > 1 ? "s" : ""} at Price ${"$" + Number(trade.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })} `}</span>
-                                    <span className='flex gap-2 items-center ' >
+                                    <span className='  text-white'>{`${trade.tradeType == 'BB' ? "Bought" : trade.tradeType=='BS' ? "Short Sell" : trade.tradeType=='SB' ? "Exit (Type:B)" : "Exit (Type:S)"  } ${Number(trade.quantity).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0, currency: 'INR' })} Stock${trade.quantity > 1 ? "s" : ""} at Price ${"$" + Number(trade.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })} `}</span>
+                                    <span className='flex gap-2 items-center  relative ' >
                                       <span >{`Balance Change `}</span>
 
                                       {
-                                        trade.tradeType == 'S' ? <span className='font-bold text-green-500'>{"+ $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
-                                          : <span className='font-bold text-red-600'>{"- $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
+                                        trade.tradeType == "SB" || trade.tradeType == "SS"  ? 
+                                            <span className='font-bold text-green-500'>{"+ $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
+                                        
+                                          : <span className='font-bold text-red-500'>{"- $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
                                       }
 
+                                      {
+                                        returns?
+                                        returns>=0?
+                                        <span className='text-green-500  absolute right-2 font-bold '>+{Number(returns).toFixed(2)}%</span>
+                                        :<span className='text-red-500 absolute right-2 font-bold '>{Number(returns).toFixed(2)}%</span>
+                                        :<span className='text-white absolute right-2 font-bold mr-2'>--</span>
+                                      }
+                                      
 
                                     </span>
                                   </div>

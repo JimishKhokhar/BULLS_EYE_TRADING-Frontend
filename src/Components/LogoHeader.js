@@ -5,6 +5,7 @@ import { Button } from '@cred/neopop-web/lib/components';
 import stockData from '../csvjson.json'
 import NYSE from '../csvjson (1).json'
 import { PeersDataContext, ComponentDataContext, CurrStockContext, StockReloaderContext } from "../App";
+import { Link } from "react-router-dom";
 
 
 const LogoHeader = ({ selectedComponent }) => {
@@ -90,9 +91,12 @@ const LogoHeader = ({ selectedComponent }) => {
 
         <div className={`flex flex-col w-full md:hidden  md:max-w-[0px] ${searchResults?.length > 0 ? " rounded-b-3xl " : ""}   ${selectedComponent == "Stocks" ? "fixed top-0 rounded-b-md   z-10 bg-black" : ""}`}>
             <div className=" md:hidden block fixed top-0 w-[100vw] -mt-2  z-40 bg-black px-1  pl-3 py-1 pt-3">
-                <img src={Logo} className="h-[50px] mx-auto " onClick={() => {
-                    // console.log(userObject, isLoggedIn, user)
-                }} />
+                <Link to="/">
+
+                    <img src={Logo} className="h-[50px] mx-auto " onClick={() => {
+                        // console.log(userObject, isLoggedIn, user)
+                    }} />
+                </Link>
             </div>
 
             {

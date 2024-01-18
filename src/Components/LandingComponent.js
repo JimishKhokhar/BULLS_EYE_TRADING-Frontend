@@ -57,7 +57,7 @@ const LandingComponent = () => {
 
                         </div>
                         {
-                            isLoading ?<span className="mx-auto md:mx-0 text-lg md:text-xl text-white">Loading...</span>
+                            isAuthenticated && isLoading ?<span className="mx-auto md:mx-0 text-lg md:text-xl text-white">Loading...</span>
                             :
                             totalUsers==-1 && isAuthenticated  && <span className="mx-auto md:mx-0 text-lg md:text-xl text-white">Fetching User Details...</span>
                         }
