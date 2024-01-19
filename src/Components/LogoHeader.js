@@ -102,7 +102,7 @@ const LogoHeader = ({ selectedComponent }) => {
             {
                 selectedComponent == 'Stocks' &&
 
-                <div className="  w-full flex flex-col md:hidden   md:pb-3  ">
+                <div className="  w-full flex flex-col md:hidden   md:pb-3 pb-2 ">
                     <div className=" relative  flex items-center  pt-[55px] md:pt-0 gap-3  justify-center  w-[95vw]  mx-auto  ">
                         <input onChange={(e) => {
 
