@@ -194,7 +194,7 @@ const HoldingCard = ({ isPricesLoading, setTradeTypeToExit, stock, totalPrice, q
                             }}
                         >History</Button>
                     </div>
-                    <div className={`grid grid-cols-2 gap-2 md:gap-4 mt-2  transition-all duration-300 -mr-6`} >
+                    <div className={`  mx-1 grid grid-cols-2 gap-2 md:gap-4 mt-2  transition-all duration-300 -mr-6`} >
 
                         <Button
 
@@ -221,9 +221,9 @@ const HoldingCard = ({ isPricesLoading, setTradeTypeToExit, stock, totalPrice, q
 
 
                             }}
-                        >{
-                                tradeType == "B" ? "Buy More" : "Sell More"
-                            }</Button>
+                        >
+                               <span><nobr>{ tradeType == "B" ? "Buy More" : "Sell More"}</nobr></span>
+                            </Button>
                         <Button
 
                             textStyle={{ fontWeight: 'bold', fontSize: '15', fontType: 'Josefin Sans' }}
