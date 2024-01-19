@@ -165,6 +165,9 @@ const Portfolio = () => {
 
     for (let symbol of allHoldings) {
 
+      if(symbol.stock in result)
+        continue;
+
 
       const stockQuote = await getStockQuote(symbol.stock);
 

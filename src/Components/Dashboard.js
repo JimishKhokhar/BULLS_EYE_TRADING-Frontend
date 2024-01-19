@@ -282,7 +282,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   return (
 
     <div>
-      <div className="pt-[120px] md:pt-16  overflow-hidden  min-w-full max-w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
+      <div className="pt-[110px] md:pt-16  overflow-hidden  min-w-full max-w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
         <div className="  flex justify-center  md:max-w-[90%] w-full   mx-auto md:max-h-[calc(100vh-61px)] md:min-h-[calc(100vh-61px)] md:p-5">
 

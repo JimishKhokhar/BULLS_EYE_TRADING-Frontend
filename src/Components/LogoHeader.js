@@ -102,8 +102,8 @@ const LogoHeader = ({ selectedComponent }) => {
             {
                 selectedComponent == 'Stocks' &&
 
-                <div className="  w-full flex flex-col md:hidden   pb-3  ">
-                    <div className=" relative  flex items-center  pt-[65px] md:pt-0 gap-3  justify-center  w-[95vw]  mx-auto  ">
+                <div className="  w-full flex flex-col md:hidden   md:pb-3  ">
+                    <div className=" relative  flex items-center  pt-[55px] md:pt-0 gap-3  justify-center  w-[95vw]  mx-auto  ">
                         <input onChange={(e) => {
 
                             if (e.target.value == "") {
@@ -114,7 +114,7 @@ const LogoHeader = ({ selectedComponent }) => {
                             getAllSearchResults(e.target.value);
                             setInputValue(e.target.value)
                         }}
-                            value={inputValue} className=" md:hidden text-black flex-1 px-3 py-[1px] mt-2" placeholder="Enter Stock " />
+                            value={inputValue} className=" md:hidden text-black flex-1 px-3 py-[1px] mt-2" placeholder="Enter Stock or Symbol " />
 
 
                         <div className="max-w-[30%] md:hidden  pt-1 mt-[5px]">
