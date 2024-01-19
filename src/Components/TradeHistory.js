@@ -40,7 +40,7 @@ const TradeHistory = () => {
 
 
   useEffect(() => {
-    document.title="Trade History"
+    document.title = "Trade History"
     setSelectedComponent("Portfolio");
     if (isLoggedIn) {
 
@@ -110,8 +110,8 @@ const TradeHistory = () => {
                             :
                             tradeHistory?.map((trade) => {
 
-                              let returns=trade.tradeReturn;
-                              
+                              let returns = trade.tradeReturn;
+
 
                               return (
                                 <div className='max-w-full  flex flex-col md:gap-3 md:my-1  md:p-3 p-1 px-3 md:px-5  rounded-md min-w-full bg-slate-700'>
@@ -120,25 +120,37 @@ const TradeHistory = () => {
                                     <span className='text-lg '>{new Date(trade.tradeTime).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }).toString()}</span>
                                   </div>
                                   <div className='flex md:flex-row flex-col  text-lg md:text-2xl  md:justify-between'>
-                                    <span className='  text-white'>{`${trade.tradeType == 'BB' ? "Bought" : trade.tradeType=='BS' ? "Short Sell" : trade.tradeType=='SB' ? "Exit (Type:B)" : "Exit (Type:S)"  } ${Number(trade.quantity).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0, currency: 'INR' })} Stock${trade.quantity > 1 ? "s" : ""} at Price ${"$" + Number(trade.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })} `}</span>
+                                    <span className='  text-white'>{`${trade.tradeType == 'BB' ? "Bought" : trade.tradeType == 'BS' ? "Short Sell" : trade.tradeType == 'SB' ? "Exit (Type:B)" : "Exit (Type:S)"} ${Number(trade.quantity).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0, currency: 'INR' })} Stock${trade.quantity > 1 ? "s" : ""} at Price ${"$" + Number(trade.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })} `}</span>
                                     <span className='flex gap-2 items-center  relative ' >
                                       <span >{`Balance Change `}</span>
 
                                       {
-                                        trade.tradeType == "SB" || trade.tradeType == "SS"  ? 
-                                            <span className='font-bold text-green-500'>{"+ $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
-                                        
+                                        trade.tradeType == "SB" || trade.tradeType == "SS" ?
+                                          <span className='font-bold text-green-500'>{"+ $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
+
                                           : <span className='font-bold text-red-500'>{"- $" + Number(Number(trade.quantity) * Number(trade.price)).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2, currency: 'INR' })}</span>
                                       }
 
-                                      {
-                                        returns?
-                                        returns>=0?
-                                        <span className='text-green-500  absolute right-2 font-bold '>+{Number(returns).toFixed(2)}%</span>
-                                        :<span className='text-red-500 absolute right-2 font-bold '>{Number(returns).toFixed(2)}%</span>
-                                        :<span className='text-white absolute right-2 font-bold mr-2'>--</span>
-                                      }
-                                      
+                                      <div className='hidden md:block pl-3'>
+                                        {
+                                          returns ?
+                                            returns >= 0 ?
+                                              <span className='text-green-500    font-bold '>+{Number(returns).toFixed(2)}%</span>
+                                              : <span className='text-red-500   font-bold '>{Number(returns).toFixed(2)}%</span>
+                                            : <span className='text-white   font-bold mr-2 ml-4'>--</span>
+                                        }
+                                      </div>
+
+                                      <div className='block md:hidden absolute right-2'>
+                                        {
+                                          returns ?
+                                            returns >= 0 ?
+                                              <span className='text-green-500  font-bold '>+{Number(returns).toFixed(2)}%</span>
+                                              : <span className='text-red-500  font-bold '>{Number(returns).toFixed(2)}%</span>
+                                            : <span className='text-white  font-bold mr-2'>--</span>
+                                        }
+                                      </div>
+
 
                                     </span>
                                   </div>
