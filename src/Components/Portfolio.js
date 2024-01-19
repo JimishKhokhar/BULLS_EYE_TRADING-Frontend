@@ -12,10 +12,13 @@ import TradeHistory from './TradeHistory'
 import BuyDialog from './BuyDialog'
 import ShortDialog from './ShortDialog'
 
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 const Portfolio = () => {
+  const navigate = useNavigate();
 
   const { totalUsers, setTotalUsers } = useContext(ComponentDataContext)
 
@@ -463,6 +466,9 @@ const Portfolio = () => {
                                       size="big"
                                       colorMode="dark"
                                       textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
+                                      onClick={()=>{
+                                        navigate('/stocks')
+                                      }}
 
                                     >Stocks</Button>
                                   </div>
