@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BULLS_EYE_TRADING-Frontend/static/css/main.587c533e.css",
-    "main.js": "/BULLS_EYE_TRADING-Frontend/static/js/main.679546af.js",
+    "main.js": "/BULLS_EYE_TRADING-Frontend/static/js/main.c1d38b9a.js",
     "static/js/787.180583ec.chunk.js": "/BULLS_EYE_TRADING-Frontend/static/js/787.180583ec.chunk.js",
     "static/media/landingPage.png": "/BULLS_EYE_TRADING-Frontend/static/media/landingPage.0e73c334cc06351fb38a.png",
     "static/media/landingPage-2.jpg": "/BULLS_EYE_TRADING-Frontend/static/media/landingPage-2.96e7fc6deb32dff1d356.jpg",
@@ -42,11 +42,11 @@
     "static/media/close-lg-svgrepo-com (1).svg": "/BULLS_EYE_TRADING-Frontend/static/media/close-lg-svgrepo-com (1).8a6bdf60d7f85a3af02e03162eb0d4c9.svg",
     "static/media/gmail-svgrepo-com.svg": "/BULLS_EYE_TRADING-Frontend/static/media/gmail-svgrepo-com.87cc67187afd3477d6c29ef768e48834.svg",
     "main.587c533e.css.map": "/BULLS_EYE_TRADING-Frontend/static/css/main.587c533e.css.map",
-    "main.679546af.js.map": "/BULLS_EYE_TRADING-Frontend/static/js/main.679546af.js.map",
+    "main.c1d38b9a.js.map": "/BULLS_EYE_TRADING-Frontend/static/js/main.c1d38b9a.js.map",
     "787.180583ec.chunk.js.map": "/BULLS_EYE_TRADING-Frontend/static/js/787.180583ec.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.587c533e.css",
-    "static/js/main.679546af.js"
+    "static/js/main.c1d38b9a.js"
   ]
 }
