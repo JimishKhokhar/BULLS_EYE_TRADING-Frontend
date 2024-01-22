@@ -11,6 +11,10 @@ import Dialog from "./Dialog";
 import { Button } from '@cred/neopop-web/lib/components';
 import { formatMillisecondsToDateTime } from "../Utility";
 
+import { ComponentDataContext } from "../App";
+
+import { useAuth0 } from "@auth0/auth0-react";
+
 import LiveNow from "../Images/live-now.gif"
 import NotLive from "../Images/not-allowed-symbol-svgrepo-com.svg"
 import ShortDialog from "./ShortDialog";
@@ -26,6 +30,11 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
   //Market Status Hook
   const isMarketLive = useMarketTimeChecker();
+
+
+  //for showing appropriate message when user try to trade when fetching user details
+  const { isAuthenticated } = useAuth0();
+  const { totalUsers } = useContext(ComponentDataContext);
 
 
   //Loading DotENV File
@@ -300,7 +309,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
                 <ShortDialog stockToShort={currentStock} closeTheDialog={() => { closeTheDialog() }} />
 
               </div>
-              : <></> 
+              : <></>
           }
 
 
@@ -515,6 +524,11 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
                       infoAlert("Please Login before Trading!", 'top-center')
                       return;
                     }
+                    else if (isAuthenticated && totalUsers == -1) {
+                      infoAlert("Please Wait while fetching user details", 'top-center')
+                      return;
+                    }
+
                     setIsOpen(1);
                   }}><span>BUY</span></Button>
                 <Button
@@ -531,6 +545,10 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
                   onClick={() => {
                     if (!isLoggedIn) {
                       infoAlert("Please Login before Trading!", 'top-center')
+                      return;
+                    }
+                    else if (isAuthenticated && totalUsers == -1) {
+                      infoAlert("Please Wait while fetching user details", 'top-center')
                       return;
                     }
                     setIsOpen(2)

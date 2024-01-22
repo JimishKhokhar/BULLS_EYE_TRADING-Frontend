@@ -168,7 +168,7 @@ const Portfolio = () => {
 
     for (let symbol of allHoldings) {
 
-      if(symbol.stock in result)
+      if (symbol.stock in result)
         continue;
 
 
@@ -208,10 +208,24 @@ const Portfolio = () => {
 
     for (let holding of allHoldings) {
       let quantity = Number(holding.quantity.$numberDecimal);
+      let totalPrice= Number(holding.totalPrice.$numberDecimal);
+      let avgPrice=Number(totalPrice/quantity);
+
       let livePrice = Number(livePrices[holding.stock]);
 
-      // console.log(livePrice)
-      worth += Number(quantity * livePrice);
+
+      // worth += Number(quantity * livePrice);
+      if (holding.holdingType == "B") {
+        // console.log(livePrice)
+        worth += Number(quantity * livePrice);
+      }
+      else 
+      {
+        worth += Number( 2*(totalPrice) - (livePrice*quantity) );
+      }
+
+
+
     }
     setNetworth(worth + currentBalance);
   }
@@ -274,8 +288,8 @@ const Portfolio = () => {
   }
 
   const [stockToBuy, setStockToBuy] = useState("");
-  const [tradeTypeToExit,setTradeTypeToExit]=useState("");
-  const [avgPricePortfolio,setAvgPricePortfolio]=useState(0);
+  const [tradeTypeToExit, setTradeTypeToExit] = useState("");
+  const [avgPricePortfolio, setAvgPricePortfolio] = useState(0);
 
 
   useEffect(() => {
@@ -298,7 +312,7 @@ const Portfolio = () => {
 
           <div className="flex justify-center w-full content-center min-h-[calc(100vh-61px)] p-3 md:p-5">
             {isOpen == 1 ? <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
-              <SellDialog closeTheDialog={closeTheDialog} updateHoldingCard={updateHoldingCard} tradeTypeToExit={tradeTypeToExit} avgPricePortfolio={avgPricePortfolio}/>
+              <SellDialog closeTheDialog={closeTheDialog} updateHoldingCard={updateHoldingCard} tradeTypeToExit={tradeTypeToExit} avgPricePortfolio={avgPricePortfolio} />
             </div>
               :
               isOpen == 2 ?
@@ -307,12 +321,12 @@ const Portfolio = () => {
                     updateHoldingCardForBuying={updateHoldingCardForBuying} />
                 </div>
                 :
-              isOpen==3 ?
-              <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
-                  <ShortDialog stockToShort={stockToBuy} closeTheDialog={closeTheDialog}
-                    updateHoldingCardForBuying={updateHoldingCardForBuying} />
-              </div>
-              :<></>
+                isOpen == 3 ?
+                  <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
+                    <ShortDialog stockToShort={stockToBuy} closeTheDialog={closeTheDialog}
+                      updateHoldingCardForBuying={updateHoldingCardForBuying} />
+                  </div>
+                  : <></>
 
             }
 
@@ -466,7 +480,7 @@ const Portfolio = () => {
                                       size="big"
                                       colorMode="dark"
                                       textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
-                                      onClick={()=>{
+                                      onClick={() => {
                                         navigate('/stocks')
                                       }}
 
