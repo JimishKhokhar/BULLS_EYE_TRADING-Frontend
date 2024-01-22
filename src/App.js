@@ -6,7 +6,7 @@ import { Context, createContext, useContext, useEffect, useState } from 'react';
 import Peers from './Components/Peers';
 import LandingComponent from './Components/LandingComponent';
 import Stocks from './Components/Stocks';
-import { BrowserRouter, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, RouterProvider, Routes, createBrowserRouter ,HashRouter,createHashRouter } from 'react-router-dom';
 import LoginComponent from './Components/LoginComponent';
 import Signup from './Components/Signup';
 import Portfolio from './Components/Portfolio';
@@ -39,7 +39,7 @@ export const ComponentDataContext = createContext();
 
 
 
-const router1 = createBrowserRouter([
+const router1 = createHashRouter([
   {
     path: "/",
     element: <div>
