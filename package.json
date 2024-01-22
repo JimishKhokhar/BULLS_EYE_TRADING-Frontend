@@ -1,4 +1,5 @@
 {
+  "homepage": "https://JimishKhokhar.github.io/BULLS_EYE_TRADING-Frontend",
   "name": "bullseye-trader",
   "version": "0.1.0",
   "private": true,
@@ -15,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "gh-pages": "^6.1.1",
     "luxon": "^3.4.4",
     "moment-timezone": "^0.5.43",
     "mongodb": "^6.2.0",
@@ -32,6 +34,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
