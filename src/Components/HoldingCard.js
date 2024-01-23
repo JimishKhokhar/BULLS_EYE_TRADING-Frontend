@@ -62,7 +62,7 @@ const HoldingCard = ({ isPricesLoading, setTradeTypeToExit, stock, totalPrice, q
     return (
         <div className={` select-none overflow-hidden holding-card text-white bg-slate-700 min-w-full max-w-full rounded-md  md:px-10 transition-all duration-300 ${isOpen ? 'md:pr-28' : ''} `}>
             <div className={`flex justify-start p-2 md:p-3   flex-col `}>
-                <div className='text-2xl md:text-3xl  relative w-full  bg-black md:bg-slate-700  font-bold  rounded-lg pb-1 md:pb-2  flex justify-center md:justify-start' onClick={() => { setIsOpen(!isOpen) }}>
+                <div className='text-2xl md:text-3xl  relative w-full  bg-black md:bg-slate-700  font-bold  rounded-lg pb-1 md:pb-2  flex justify-center md:justify-start' >
 
                     <span className=' text-white  md:px-3  md:py-1 mt-1 bg-black rounded-lg shadow-custom'>{stock}</span>
 
