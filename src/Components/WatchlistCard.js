@@ -9,6 +9,7 @@ import BuyDialog from './BuyDialog'
 import { getStockQuote } from '../utils'
 import { deleteFromWatchlistUtils } from '../utils'
 
+
 const WatchlistCard = ({ item, setIsOpen, setStockToBuy ,deleteFromLocal }) => {
 
     const { successAlert, failAlert, infoAlert } = useContext(ComponentDataContext);
@@ -184,7 +185,8 @@ const WatchlistCard = ({ item, setIsOpen, setStockToBuy ,deleteFromLocal }) => {
                                 size="small"
                                 colorMode="dark"
                                 onClick={() => {
-                                    infoAlert("Short Selling will be Available Soon!", "top-center");
+                                    setIsOpen(2);
+                                    setStockToBuy(item.stockSymbol);
                                 }}
                                 className='px-4 py-1 bg-red-600'
 

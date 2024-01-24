@@ -7,6 +7,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import WatchlistCard from './WatchlistCard'
 import BuyDialog from './BuyDialog'
 
+import ShortDialog from './ShortDialog'
+
 
 const Watchlist = () => {
 
@@ -80,7 +82,10 @@ const Watchlist = () => {
     <div className=" transition-all md:pt-16 duration-500 select-none text-white  pt-[62px] overflow-hidden w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
       {
-        isOpen == 2 ? <></> :
+        isOpen == 2 ? 
+        <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
+          <ShortDialog stockToShort={stockToBuy} closeTheDialog={closeTheDialog} />
+        </div> :
           isOpen == 1 ?
             <div className='w-[100vw]   md:w-fit fixed z-30  bottomUp  md:right-[350px]  bottom-0 roll-out '>
               <BuyDialog stockToBuy={stockToBuy} closeTheDialog={closeTheDialog} />
