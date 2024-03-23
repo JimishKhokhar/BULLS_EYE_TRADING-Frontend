@@ -62,7 +62,21 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   const navigate = useNavigate();
 
   const [displayMessage, setDisplayMessage] = useState("");
+  const [isStockPriceDull, setIsStockPriceDull] = useState(false);
 
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function startTheProcess() {
+    setInterval(async () => {
+
+      setIsStockPriceDull(true);
+      await delay(2000);
+      setIsStockPriceDull(false);
+      getStockQuote();
+    }, 14000)
+  }
 
 
   useEffect(() => {
@@ -71,6 +85,9 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     console.log("Stock Changed!")
     getTheData(endTime - 86400, endTime, "1min");
     getStockQuote();
+
+    startTheProcess();
+
     setButtonSelected(0);
   }, [currentStock]);
 
@@ -374,7 +391,20 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
 
 
-              <span className=" text-center text-4xl "> {"$" + Number(stockQuote.c).toFixed(2)}</span>
+              <span className=" text-center text-4xl ">
+                {isStockPriceDull ? (
+                  // If isDullStockPrice is true, show dulled stock price
+                  <div>
+                    <span>$</span>
+                    <span style={{ opacity: 0.5 }}>{Number(stockQuote.c).toFixed(2)}</span>
+                  </div>
+                ) : (
+                  // If isDullStockPrice is false, show normal stock price
+                  <div>
+                    <span>$</span>
+                    <span>{Number(stockQuote.c).toFixed(2)}</span>
+                  </div>
+                )}</span>
               <div className="flex justify-center mt-1 flex-1">
                 {
                   ((((endPrice - startPrice) / startPrice) * 100).toFixed(2) >= 0) ?
