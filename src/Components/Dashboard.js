@@ -63,19 +63,48 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
   const [displayMessage, setDisplayMessage] = useState("");
   const [isStockPriceDull, setIsStockPriceDull] = useState(false);
+  const [currentIntervalId, setCurrentIntervalId] = useState(null);
 
   function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async function startTheProcess() {
-    setInterval(async () => {
+  useEffect(() => {
+    // Code to run when ComponentA mounts
 
-      setIsStockPriceDull(true);
-      await delay(2000);
-      setIsStockPriceDull(false);
-      getStockQuote();
-    }, 14000)
+    return () => {
+      // Code to run when ComponentA unmounts
+      console.log("Unmounting Dashboard",currentIntervalId);
+      if(currentIntervalId)
+      clearInterval(currentIntervalId);
+      // Cleanup tasks if any
+    };
+  }, []); // Empty dependency array means effect runs only on mount and unmount
+
+
+  // async function startTheProcess() {
+
+  //   if(currentIntervalId)
+  //   {
+  //     clearInterval(currentIntervalId)
+  //     setCurrentIntervalId(null);
+  //   }
+
+  //   let id= setInterval(async () => {
+
+  //     setIsStockPriceDull(true);
+  //     await delay(2000);
+  //     setIsStockPriceDull(false);
+  //     getStockQuote();
+  //   }, 14000)
+  //   return id;
+  // }
+
+  async function startTheProcess() {
+    setIsStockPriceDull(true);
+    await delay(2000);
+    setIsStockPriceDull(false);
+    getStockQuote();
   }
 
 
@@ -86,10 +115,25 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     getTheData(endTime - 86400, endTime, "1min");
     getStockQuote();
 
-    startTheProcess();
+    if (currentIntervalId) {
+      clearInterval(currentIntervalId);
+    }
+
+    // Start new interval for the currentStock
+    const intervalId = setInterval(startTheProcess, 14000);
+    setCurrentIntervalId(intervalId);
+    
+
 
     setButtonSelected(0);
+
+    
+
   }, [currentStock]);
+
+  useEffect(()=>{
+    console.error("New Interval ID is ",currentIntervalId)
+  },[currentIntervalId])
 
   useEffect(() => {
     console.log("Time Frame Changed!");
@@ -115,6 +159,8 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // return;
     // console.log("Nathi Joto Data--------------")
     // return;
+
+    console.error("Interval ID is ",currentIntervalId)
 
     const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
 
