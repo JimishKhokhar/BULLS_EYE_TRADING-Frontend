@@ -23,7 +23,7 @@ import ShortDialog from "./ShortDialog";
 import useMarketTimeChecker from "./marketTimeChecker";
 
 
-import { addToWatchlistUtils } from "../utils";
+import { addToWatchlistUtils,getStockQuote } from "../utils";
 
 
 const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
@@ -95,7 +95,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   //     setIsStockPriceDull(true);
   //     await delay(2000);
   //     setIsStockPriceDull(false);
-  //     getStockQuote();
+  //     getStockQuoteLocal();
   //   }, 14000)
   //   return id;
   // }
@@ -104,7 +104,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     setIsStockPriceDull(true);
     await delay(2000);
     setIsStockPriceDull(false);
-    getStockQuote();
+    getStockQuoteLocal();
   }
 
 
@@ -113,19 +113,19 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     getStockProfile();
     console.log("Stock Changed!")
     getTheData(endTime - 86400, endTime, "1min");
-    getStockQuote();
+    getStockQuoteLocal();
 
-    if (currentIntervalId) {
-      clearInterval(currentIntervalId);
-    }
+    // if (currentIntervalId) {
+    //   clearInterval(currentIntervalId);
+    // }
 
-    // Start new interval for the currentStock
-    const intervalId = setInterval(startTheProcess, 14000);
-    setCurrentIntervalId(intervalId);
+    // // Start new interval for the currentStock
+    // const intervalId = setInterval(startTheProcess, 14000);
+    // setCurrentIntervalId(intervalId);
     
 
 
-    setButtonSelected(0);
+    // setButtonSelected(0);
 
     
 
@@ -154,27 +154,33 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   }, [buttonSelected]);
 
 
-  async function getStockQuote() {
+  async function getStockQuoteLocal() {
     // console.log("Nathi Joto Data--------------")
     // return;
     // console.log("Nathi Joto Data--------------")
     // return;
 
-    console.error("Interval ID is ",currentIntervalId)
+    // console.error("Interval ID is ",currentIntervalId)
 
-    const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
+    // const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
 
-    if (!response.ok)
+    // if (!response.ok)
+    //   return;
+
+    // console.log("Jimish")
+    // console.log(response);
+    // console.log("Jimish")
+
+    // const pureData = await response.json();
+
+    // console.log(pureData);
+
+    const response=await getStockQuote(currentStock);
+
+    if(response.c==Infinity)
       return;
 
-    console.log("Jimish")
-    console.log(response);
-    console.log("Jimish")
-
-    const pureData = await response.json();
-
-    console.log(pureData);
-    setStockQuote(pureData);
+    setStockQuote(response);
   }
 
 

@@ -71,20 +71,43 @@ export async function getStockQuote(stock) {
     }
 
 
-    const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${stock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
+    // const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${stock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
 
-    if (!response.ok) {
-        return { c: Infinity };
+    // if (!response.ok) {
+    //     return { c: Infinity };
+    // }
+
+    // const pureData = await response.json();
+
+    // return pureData;
+
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/getStockQuote`,
+        {
+            method: "POST",
+            body: JSON.stringify({
+                stock
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }
+    )
+
+    
+    
+
+    if(response.status==500)
+    {
+        return {c:Infinity};
     }
-
-    const pureData = await response.json();
-
+    const pureData=await response.json();
+    console.error(pureData)
     return pureData;
 }
 
 
 
-export async function buyStock(user_id, stock, price, quantity, time,type="B") {
+export async function buyStock(user_id, stock, price, quantity, time, type = "B") {
     // console.log(userObject)
     // alert(`Buying ${stock} for ${price} \n Quantity:${quantity}\n Total Value:${Number(price*quantity).toFixed(2)}`);
     // return 0;
@@ -96,7 +119,7 @@ export async function buyStock(user_id, stock, price, quantity, time,type="B") {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/buyStock`, {
             method: "POST",
             body: JSON.stringify({
-                user_id, stock, quantity, price, time,type
+                user_id, stock, quantity, price, time, type
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -115,11 +138,11 @@ export async function buyStock(user_id, stock, price, quantity, time,type="B") {
 
 
 
-export async function sellTheStock(holdingIdToSell, sellingPrice, quantityToSell, time,tradeTypeToExit)//returns 0 or 1 as per the status of completion of selling the stock
+export async function sellTheStock(holdingIdToSell, sellingPrice, quantityToSell, time, tradeTypeToExit)//returns 0 or 1 as per the status of completion of selling the stock
 {
 
     //id means _id of holding
-    console.log(holdingIdToSell, sellingPrice, quantityToSell,tradeTypeToExit);
+    console.log(holdingIdToSell, sellingPrice, quantityToSell, tradeTypeToExit);
     // return;
 
     if (!holdingIdToSell || !sellingPrice || !quantityToSell || !tradeTypeToExit)
@@ -129,7 +152,7 @@ export async function sellTheStock(holdingIdToSell, sellingPrice, quantityToSell
             const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/sellStock`, {
                 method: "POST",
                 body: JSON.stringify({
-                    holdingIdToSell, sellingPrice, quantityToSell, time,tradeTypeToExit
+                    holdingIdToSell, sellingPrice, quantityToSell, time, tradeTypeToExit
                 }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -381,7 +404,7 @@ export async function getTotalUsersUtils() {
         });
 
 
-        console.log("GETTNG ",process.env.REACT_APP_BACKEND_API)
+        console.log("GETTNG ", process.env.REACT_APP_BACKEND_API)
 
 
         const pureData = await response.json();
@@ -407,9 +430,8 @@ export async function findMarketStatusUtils() {
         }
         return -1;
     }
-    catch(e)
-    {
+    catch (e) {
         return -1;
     }
-    
+
 }
