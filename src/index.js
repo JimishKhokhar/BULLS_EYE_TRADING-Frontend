@@ -5,6 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
 
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-P20793DP0F");
+ReactGA.send({
+  hintType:"pageView",
+  page:window.location.pathname
+})
 
 
 
