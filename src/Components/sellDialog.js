@@ -3,6 +3,7 @@ import Logo from "../Images/close-lg-svgrepo-com (1).svg"
 import { buyStock, findTheBalance, sellTheStock } from '../utils';
 import { ComponentDataContext, UserDataContext } from '../App';
 import { Button } from '@cred/neopop-web/lib/components';
+import { getStockQuote } from '../utils';
 
 import useMarketTimeChecker from './marketTimeChecker';
 
@@ -32,29 +33,27 @@ const SellDialog = (props) => {
   console.log(stockToSell, maxQuantityToSell)
 
   useEffect(() => {
-    getStockQuote();
+    getStockQuoteLocal();
   }, [stockToSell]);
 
 
 
-  async function getStockQuote() {
+  async function getStockQuoteLocal() {
 
     setIsDataLoading(true);
     // setStockQuote({c:"120.345",o:"117.45",l:"110.111",h:"150.44"});
     // return;
 
-    const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${stockToSell}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
+    const response = await getStockQuote(stockToSell)
 
-    if (!response.ok) {
+    if (response.c==Infinity) {
       failAlert("Not Able to Fetch Data!");
       setIsResultFound(-1)
       return;
     }
 
-    const pureData = await response.json();
 
-    console.log(pureData);
-    setStockQuote(pureData);
+    setStockQuote(response);
     setIsResultFound(1);
     setIsDataLoading(false);
   }

@@ -3,6 +3,7 @@ import Logo from "../Images/close-lg-svgrepo-com (1).svg"
 import { buyStock, findTheBalance } from '../utils';
 import { ComponentDataContext, UserDataContext } from '../App';
 import { Button } from '@cred/neopop-web/lib/components';
+import { getStockQuote } from '../utils';
 
 import useMarketTimeChecker from './marketTimeChecker';
 
@@ -45,7 +46,7 @@ const Dialog = (props) => {
   useEffect(() => {
     // alert(stock);
     // findIt();
-    getStockQuote();
+    getStockQuoteLocal();
   }, [stock]);
 
   useEffect(() => {
@@ -56,27 +57,23 @@ const Dialog = (props) => {
   }, []);
 
 
-  async function getStockQuote() {
+  async function getStockQuoteLocal() {
 
     //Starting the loader 
     setIsDataLoading(true);
 
-    const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${stock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
+    const response = await getStockQuote(stock)
+    
 
-    if (!response.ok) {
+
+
+    if (response.c==Infinity) {
       failAlert("Not Able to Fetch Data!");
       setIsResultFound(-1);
       return;
     }
 
-    // console.log("Jimish")
-    // console.log(response);
-    // console.log("Jimish")
-
-    const pureData = await response.json();
-
-    console.log(pureData);
-    setStockQuote(pureData);
+    setStockQuote(response);
     setIsResultFound(1)
 
     setIsDataLoading(false);

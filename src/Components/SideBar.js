@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { CurrStockContext } from "../App";
+import { getStockMetricUtils } from "../utils";
 
 
 const Sidebar = () => {
@@ -17,9 +18,11 @@ const Sidebar = () => {
 
   async function getFinancials() {
     setIsLoaded(0);
-    const response = await fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${currentStock}&metric=all&token=${process.env.REACT_APP_FINNHUB_API_KEY}`)
-    if (response.ok) {
-      const pureData = await response.json();
+    // const response = await fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${currentStock}&metric=all&token=${process.env.REACT_APP_FINNHUB_API_KEY}`)
+    const response = await getStockMetricUtils(currentStock);
+
+    if (response) {
+      const pureData = response;
       console.log(pureData);
       setMatrices(pureData);
       setIsLoaded(1);

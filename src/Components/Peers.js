@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { StockReloaderContext } from "../App";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import Sidebar from "../Components/SideBar";
+import { getStockPeersUtils,getStockProfileUtils } from "../utils";
 
 const Peers = () => {
     //Contexts
@@ -40,10 +41,12 @@ const Peers = () => {
         setIsDataLoading(true);
 
 
-        const response = await fetch(`https://finnhub.io/api/v1/stock/peers?symbol=${stock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-        if (response.ok) {
+       
+        const response= await getStockPeersUtils(stock);
+        if (response.length>0) {
             console.log("Stock Changed To " + stock);
-            let pureData = await response.json();
+            // let pureData = await response.json();
+            let pureData=response;
             pureData = pureData?.splice(0, 6);
             pureData = pureData?.filter((peer) => !peer?.includes('.'))
             console.log(pureData)
@@ -142,9 +145,10 @@ const Peers = () => {
 
 
     async function getTheStockProfile(stock) {
-        let response = await fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-        if (response.ok) {
-            let pureData = await response.json();
+        
+        const response = await getStockProfileUtils(stock);
+        if (response) {
+            let pureData = response;
             // setProfile(pureData);
             return pureData;
         }

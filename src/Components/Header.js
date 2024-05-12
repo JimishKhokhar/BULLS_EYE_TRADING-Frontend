@@ -61,36 +61,7 @@ const Header = () => {
     }
 
 
-    async function getTheData() {
-        let date = new Date().getMilliseconds;
-        let UNIX = date * 1000;
-        const response = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${currentStock}&resolution=D&from=0&to=${UNIX}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-
-        if (response.ok) {
-            const pureData = await response.json();
-
-
-
-
-            const DATA = [];
-
-            for (let i = 0; i < pureData['c'].length; i++) {
-                let p = Number(pureData['c'][i]);
-                DATA.push({
-
-                    price: p,
-                    time: new Date(pureData['t'][i] * 1000).getFullYear()
-                })
-            }
-
-            // console.log(DATA[0].time);
-            // console.log(DATA[1].time);
-
-            setData(DATA);
-        }
-
-
-    }
+    
 
     async function getAllSearchResults(query) {
 
@@ -120,26 +91,6 @@ const Header = () => {
 
     }
 
-    // async function getAllSearchResults(searchText) {
-    //     const resultResponse = await fetch(`https://finnhub.io/api/v1/search?q=${searchText}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-    //     if (resultResponse.ok) {
-    //         const result = await resultResponse.json();
-
-    //         if (result['s'] == "no_data") {
-    //             alert("No Search Results Found!");
-    //             return;
-    //         }
-
-    //         const commonStocks = result.result.filter((stock) => {
-    //             return stock.type == "Common Stock" && !stock.symbol.includes(".");
-    //         });
-
-    //         // console.log(commonStocks);
-    //         setSearchResults(commonStocks);
-    //     }
-
-
-    // }
     const [isShowNumberOfResults, setIsShowNumberOfResults] = useState(false);
 
 

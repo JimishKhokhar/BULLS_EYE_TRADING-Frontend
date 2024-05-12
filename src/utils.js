@@ -101,10 +101,102 @@ export async function getStockQuote(stock) {
         return {c:Infinity};
     }
     const pureData=await response.json();
-    console.error(pureData)
+    console.error("From Utils"+pureData)
     return pureData;
 }
 
+
+export async function getStockPeersUtils(stock)
+{
+    console.log(`API CALL for ${stock} --------------------`)
+    if (!stock) {
+        return undefined;
+    }
+
+    try{
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/getPeers`,
+        {
+            method: "POST",
+            body: JSON.stringify({
+                stock
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        if(response.status==500)
+            return [];
+        const pureData=await response.json();
+        console.error("PEERS From Utils",pureData)
+        return pureData;
+
+    }
+    catch(e)
+    {
+        return [];
+    }
+}
+
+export async function getStockMetricUtils(stock)
+{
+    console.log(`METRIC CALL for ${stock} --------------------`)
+    if (!stock) {
+        return undefined;
+    }
+
+    try{
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/getMetric`,
+        {
+            method: "POST",
+            body: JSON.stringify({
+                stock
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        if(response.status==500)
+            return undefined;
+        const pureData=await response.json();
+        console.error("METRIC From Utils",pureData)
+        return pureData;
+
+    }
+    catch(e)
+    {
+        return undefined;
+    }
+}
+
+export async function getStockProfileUtils(stock)
+{
+    console.log(`METRIC CALL for ${stock} --------------------`)
+    if (!stock) {
+        return undefined;
+    }
+    try{
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/getStockProfile`,
+        {
+            method: "POST",
+            body: JSON.stringify({
+                stock
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        if(response.status==500)
+            return undefined;
+        const pureData=await response.json();
+        console.error("STOCK PROFILE From Utils",pureData)
+        return pureData;
+
+    }
+    catch(e)
+    {
+        return undefined;
+    }
+}
 
 
 export async function buyStock(user_id, stock, price, quantity, time, type = "B") {
@@ -420,17 +512,37 @@ export async function getTotalUsersUtils() {
 }
 
 export async function findMarketStatusUtils() {
+    // try {
+    //     const response = await fetch(`https://finnhub.io/api/v1/stock/market-status?exchange=US&token=${process.env.REACT_APP_FINNHUB_API_KEY}`)
+    //     if (response.status == 200) {
+    //         const pureData = await response.json();
+    //         if (pureData.isOpen)
+    //             return 1;
+    //         else return 0;
+    //     }
+    //     return -1;
+    // }
+    // catch (e) {
+    //     return -1;
+    // }
+    console.error("MARKET STATUS from Utils ----------------------")
+
     try {
-        const response = await fetch(`https://finnhub.io/api/v1/stock/market-status?exchange=US&token=${process.env.REACT_APP_FINNHUB_API_KEY}`)
-        if (response.status == 200) {
-            const pureData = await response.json();
-            if (pureData.isOpen)
-                return 1;
-            else return 0;
-        }
-        return -1;
-    }
-    catch (e) {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/getMarketStatus`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+
+        
+
+        const pureData = response;
+        console.error("MARKET STATUS from Utils ----------------------", pureData)
+        
+        return pureData?.marketStatus;
+        
+    } catch (error) {
         return -1;
     }
 

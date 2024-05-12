@@ -23,7 +23,7 @@ import ShortDialog from "./ShortDialog";
 import useMarketTimeChecker from "./marketTimeChecker";
 
 
-import { addToWatchlistUtils,getStockQuote } from "../utils";
+import { addToWatchlistUtils,getStockQuote,getStockProfileUtils } from "../utils";
 
 
 const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
@@ -155,25 +155,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
 
   async function getStockQuoteLocal() {
-    // console.log("Nathi Joto Data--------------")
-    // return;
-    // console.log("Nathi Joto Data--------------")
-    // return;
-
-    // console.error("Interval ID is ",currentIntervalId)
-
-    // const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-
-    // if (!response.ok)
-    //   return;
-
-    // console.log("Jimish")
-    // console.log(response);
-    // console.log("Jimish")
-
-    // const pureData = await response.json();
-
-    // console.log(pureData);
+    
 
     const response=await getStockQuote(currentStock);
 
@@ -220,32 +202,12 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
 
 
-    //let response = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${currentStock}&resolution=${res}&from=${startTime}&to=${endTime}&token=ci7mp5hr01qni8lhcfugci7mp5hr01qni8lhcfv0`);
+   
     if (!response.ok)
       return;
     else if (!response)
       return;
 
-    // console.log("Jimish")
-    // console.log(response);
-    // console.log("Jimish")
-
-
-
-
-    // if (pureData['s'] == "no_data") {
-    //   response = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${currentStock}&resolution=${res}&from=${startTime - 86400}&to=${endTime}&token=ci7mp5hr01qni8lhcfugci7mp5hr01qni8lhcfv0`);
-    //   pureData = await response.json();
-
-    //   if (pureData['s'] == "no_data") {
-    //     response = await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${currentStock}&resolution=${res}&from=${startTime - 86400 - 86400}&to=${endTime}&token=ci7mp5hr01qni8lhcfugci7mp5hr01qni8lhcfv0`);
-    //     pureData = await response.json();
-    //     if (pureData['s'] == "no_data") {
-    //       setIsDataAvailable(0);
-    //       return;
-    //     }
-    //   }
-    // }
 
     if (pureData.status == "ok") {
       setIsDataAvailable(true);
@@ -317,17 +279,14 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   }
 
   async function getStockProfile() {
-    // console.log("Nathi Joto Data--------------")
-    // return;
-    const response = await fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-    if (!response.ok)
+
+    // const response = await fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
+    const response = await getStockProfileUtils(currentStock);
+    if (response==undefined)
       return;
 
-    console.log("Jimish")
-    console.log(response);
-    console.log("Jimish")
 
-    const pureData = await response?.json();
+    const pureData =response;
 
     console.log(pureData)
     setStockProfile(pureData);
