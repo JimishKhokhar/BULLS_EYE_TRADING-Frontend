@@ -537,7 +537,7 @@ export async function findMarketStatusUtils() {
 
         
 
-        const pureData = response;
+        const pureData =await response.json();
         console.error("MARKET STATUS from Utils ----------------------", pureData)
         
         return pureData?.marketStatus;
