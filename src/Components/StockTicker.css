@@ -1,0 +1,67 @@
+/* Wrapper for the entire ticker */
+.ticker-wrapper {
+  background-color: black; /* Black padding background */
+  padding: 0 15px; /* Add padding to both sides */
+}
+
+
+/* Container to hold the ticker */
+.ticker-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 5px 0;
+  position: relative;
+}
+
+/* Track that will scroll */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 30s linear infinite; /* Adjust the duration as needed */
+}
+
+/* Each ticker item (stock) */
+.ticker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; /* Reduced padding for less gap */
+  white-space: nowrap;
+  color: white;
+  font-size: 16px;
+  min-width: max-content;
+}
+
+.symbol {
+  font-weight: bold; /* Make the symbol bold */
+  margin-right: 10px; /* Add space between symbol and price */
+}
+
+.price {
+  margin-right: 10px; /* Add space between price and change */
+}
+
+.change {
+  display: flex;
+  align-items: center;
+}
+
+.positive {
+  color: #16a34a;
+  font-weight: bold; /* Make the arrow bold */
+}
+
+.negative {
+  color: red;
+  font-weight: bold; /* Make the arrow bold */
+}
+
+/* The keyframes for smooth, continuous scrolling */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0); /* Start from the beginning */
+  }
+  100% {
+    transform: translateX(-50%); /* Move the entire width of half the track (duplicates cover the other half) */
+  }
+}

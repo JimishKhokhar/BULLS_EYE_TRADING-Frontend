@@ -1,0 +1,48 @@
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); } /* Move the entire width of the slide-track */
+}
+.slider {
+    background: black; /* Set background to black */
+    height: 40px; /* Reduced height for stock ticker */
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%; /* Full width */
+}
+
+.slide-track {
+    display: flex;
+    animation: scroll 15s linear infinite; /* Adjust speed as necessary */
+    /* Ensure the total width is set dynamically */
+    width: calc(100% * 2); /* Duplicated content in the slide track */
+}
+
+
+.slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* Match slider height */
+    font-size: 18px; /* Font size for stock name and price */
+    color: white; /* Change text color to white */
+    font-weight: bold; /* Make stock name bold */
+    padding: 0 10px; /* Add some padding for spacing */
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+.slide .price {
+    margin-left: 5px; /* Space between stock name and price */
+}
+
+.slide .change {
+    margin-left: 10px; /* Space between price and change */
+}
+
+.change.positive {
+    color: green; /* Green for positive change */
+}
+
+.change.negative {
+    color: red; /* Red for negative change */
+}

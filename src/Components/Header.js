@@ -5,7 +5,7 @@ import { CurrentStockDataContext } from "../App";
 import { StockReloaderContext } from "../App";
 import { Link, Router, RouterProvider, useNavigate } from "react-router-dom";
 import { Button } from '@cred/neopop-web/lib/components';
-
+import StockTicker from "./StockTicker";
 
 //Auth 0 Imports
 import { useAuth0 } from "@auth0/auth0-react";
@@ -61,7 +61,7 @@ const Header = () => {
     }
 
 
-    
+
 
     async function getAllSearchResults(query) {
 
@@ -95,7 +95,7 @@ const Header = () => {
 
 
     return (
-        <div className="w-full    bg-black  select-none  transition-all duration-500 flex flex-col" >
+        <div className="w-full     bg-black  select-none  transition-all duration-500 flex flex-col" >
             <LogoHeader className="md:hidden" selectedComponent={selectedComponent} />
             <div className="w-full  fixed top-0 z-30  bg-black  select-none  ">
                 {/* <LogoHeader/> */}
@@ -296,34 +296,19 @@ const Header = () => {
 
 
 
-                    {/* <label className="mx-auto">
-                    Your first name:
-                    <input name="firstName" onChange={(e) => { getAllSearchResults(e.target.value); setInputValue(e.target.value) }} placeholder='Enter Stock' className='px-3 text-black' value={inputValue} />
-                    <div className='w-fit max-h-[300px] overflow-y-scroll'>
-                        {
-                            searchResults.map((r) => {
-                                return (
-                                    <div className='flex justify-between' onClick={() => {
-                                        setCurrentStock(r.symbol);
-                                        setInputValue(r.description);
-                                        setSearchResults([]);
-                                    }}>
-                                        <span>{r.description}</span>
-                                        <span>{r.symbol}</span>
-                                    </div>
-                                );
-                            })
-                        }
-                    </div>
-                    <button className='m-10' onClick={() => {
-                        getTheData();
-                        console.log(currentStock)
-                    }}>Search</button>
-                </label> */}
+
 
 
 
                 </div>
+
+                {/* Insert StockTicker right here below the header content */}
+                {
+                    <div className="hidden md:block">
+                        <StockTicker /> {/* StockTicker component inserted here */}
+                    </div>
+                }
+
 
             </div>
 

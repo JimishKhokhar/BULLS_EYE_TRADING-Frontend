@@ -6,6 +6,7 @@ import { ComponentDataContext } from "../App";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from '@cred/neopop-web/lib/components';
 import { useNavigate } from 'react-router-dom';
+import StockTicker from "./StockTicker";
 
 
 const LandingComponent = () => {
@@ -26,6 +27,7 @@ const LandingComponent = () => {
 
     return (
         <div className="bg-black w-full h-[100vh] select-none ">
+          
             <div className="flex md:flex-row flex-col-reverse  max-w-[90%] min-w-[90%] mx-auto h-full">
                 {/* Left Side */}
                 <div className="w-full h-full flex justify-center md:items-center max-w-[100%] md:max-w-[50%]">

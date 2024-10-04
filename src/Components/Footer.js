@@ -1,6 +1,6 @@
 import react, { useContext } from "react";
 import { ComponentDataContext } from "../App";
-
+import StockTicker from "./StockTicker";
 
 import Logo from "../Images/brand-name.png"
 import React from "../Images/react-svgrepo-com.svg"
@@ -23,11 +23,15 @@ const Footer = () => {
     const { totalUsers, setTotalUsers } = useContext(ComponentDataContext)
 
     return (
-
+        <>
+            
+       
 
 
         <div className=" relative w-full  min-h-[350px] md:pb-0  flex flex-col    bg-black  md:pt-0">
+            
             <div className="flex flex-col  w-full items-center justify-center absolute bottom-14  md:bottom-2">
+            
             <span className=" flex w-full  gap-1 justify-center items-center self-start  ">
                         <span className="text-white ">Made In INDIA</span>
                         <img className="min-w-[20px] max-w-[20px]" src={indianFlag} />
@@ -93,6 +97,7 @@ const Footer = () => {
 
 
         </div>
+        </>
     );
 }
 export default Footer;

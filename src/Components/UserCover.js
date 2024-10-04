@@ -26,7 +26,7 @@ const UserCover = () => {
 
     return (
 
-        <div>
+        <div className='mt-7'>
             <div className=" md:pt-20  overflow-hidden w-full h-[100vh]   flex justify-center items-center mx-auto bg-black pt-[62px]  p-0 md:p-10">
                 <div className='relative w-full md:w-[450px] min-h-full bg-gradient-to-b to-slate-950 md:border-2 md:border-white from-slate-800  '>
                     <div className='w-full flex  align-middle pt-5 md:p-10 flex-col content-center gap-10'>
@@ -65,7 +65,7 @@ const UserCover = () => {
                                         logout();
                                     }}>Log Out</Button>
                             </div>
-                        </div> : <div className='absolute min-w-full flex justify-center   bottom-10'>
+                        </div> : <div className='absolute min-w-full flex justify-center  bottom-32 md:bottom-10'>
                             <div >
                                 <Button
 

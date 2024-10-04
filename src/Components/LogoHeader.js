@@ -6,6 +6,7 @@ import stockData from '../csvjson.json'
 import NYSE from '../csvjson (1).json'
 import { PeersDataContext, ComponentDataContext, CurrStockContext, StockReloaderContext } from "../App";
 import { Link } from "react-router-dom";
+import StockTicker from "./StockTicker";
 
 
 const LogoHeader = ({ selectedComponent }) => {
@@ -97,12 +98,21 @@ const LogoHeader = ({ selectedComponent }) => {
                         // console.log(userObject, isLoggedIn, user)
                     }} />
                 </Link>
+
             </div>
+
+            <div className="  fixed top-14 left-0 right-0 z-40 block md:hidden"> {/* Hidden on md and lg screens */}
+                <StockTicker /> {/* StockTicker component inserted here */}
+            </div>
+
+
+
+
 
             {
                 selectedComponent == 'Stocks' &&
 
-                <div className="  w-full flex flex-col md:hidden   md:pb-3 pb-2 ">
+                <div className=" mt-8 bg-black  w-full flex flex-col md:hidden   md:pb-3 pb-2 ">
                     <div className=" relative  flex items-center  pt-[55px] md:pt-0 gap-3  justify-center  w-[95vw]  mx-auto  ">
                         <input onChange={(e) => {
 
@@ -187,11 +197,13 @@ const LogoHeader = ({ selectedComponent }) => {
                             ><span className="text-lg font-bold">Cancel</span></Button>
                         </div>
                     }
-
                 </div>
 
 
             }
+
+
+
 
         </div>
 

@@ -543,6 +543,7 @@ export async function findMarketStatusUtils() {
         return pureData?.marketStatus;
         
     } catch (error) {
+        console.info("Getting Error in Fetching the Market Status");
         return -1;
     }
 
