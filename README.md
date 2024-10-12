@@ -1,7 +1,6 @@
 ![logo-name](https://github.com/JimishKhokhar/BULLS_EYE_TRADING-Frontend/assets/123265441/f71b8011-5a51-40b8-b142-15cc32a097ea)
  
  # START TRADING 
-https://jimishkhokhar.github.io/BULLS_EYE_TRADING-Frontend/
 https://frontend-bulls-eye-trading.onrender.com/
 
 BullsEYE Trading is an MERN Web App for Paper Trading in US Stocks. It involves features like Historical Data of All Common NYSE stocks.
