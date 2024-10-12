@@ -31,9 +31,9 @@ const Sidebar = () => {
 
   return (
 
-    <div className="flex flex-col scrollbar w-full h-[500px] overflow-scroll py-4 rounded-lg mb-0  md:my-0 md:p-0  md:max-w-[330px] md:min-h-full max-h-full gap-3  bg-black my-5 md:min-w-[330px] pt-5 pb-2  shadow-lg">
+    <div className="flex flex-col scrollbar w-full h-[450px]  border-2  border-slate-800 py-4 rounded-lg mb-0  md:my-0 md:p-0  md:max-w-[330px] md:min-h-[95%] md:max-h-[9/10] gap-3  bg-black my-5 md:min-w-[330px] pt-5 pb-2  shadow-lg">
 
-      <h1 className="text-center font-bold text-2xl text-white">Key Matrices</h1>
+      <h1 className="text-center font-bold text-2xl text-white  border-slate-800">Key Matrices</h1>
       <div className="overflow-y-auto overflow-x-hidden grow ">
         {
           isLoaded == 1 ?

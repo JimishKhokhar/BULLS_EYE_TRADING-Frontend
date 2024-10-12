@@ -79,7 +79,7 @@ const Watchlist = () => {
 
 
   return (
-    <div className=" transition-all md:pt-16 duration-500 select-none text-white  pt-[62px] overflow-hidden w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
+    <div className=" transition-all md:pt-20 duration-500 select-none text-white  pt-[82px] overflow-hidden w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
       {
         isOpen == 2 ? 

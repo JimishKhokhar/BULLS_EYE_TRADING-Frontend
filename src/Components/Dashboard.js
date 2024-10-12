@@ -23,7 +23,7 @@ import ShortDialog from "./ShortDialog";
 import useMarketTimeChecker from "./marketTimeChecker";
 
 
-import { addToWatchlistUtils,getStockQuote,getStockProfileUtils } from "../utils";
+import { addToWatchlistUtils, getStockQuote, getStockProfileUtils } from "../utils";
 
 
 const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
@@ -74,9 +74,9 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
     return () => {
       // Code to run when ComponentA unmounts
-      console.log("Unmounting Dashboard",currentIntervalId);
-      if(currentIntervalId)
-      clearInterval(currentIntervalId);
+      console.log("Unmounting Dashboard", currentIntervalId);
+      if (currentIntervalId)
+        clearInterval(currentIntervalId);
       // Cleanup tasks if any
     };
   }, []); // Empty dependency array means effect runs only on mount and unmount
@@ -122,18 +122,18 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
     // // Start new interval for the currentStock
     // const intervalId = setInterval(startTheProcess, 14000);
     // setCurrentIntervalId(intervalId);
-    
+
 
 
     // setButtonSelected(0);
 
-    
+
 
   }, [currentStock]);
 
-  useEffect(()=>{
-    console.error("New Interval ID is ",currentIntervalId)
-  },[currentIntervalId])
+  useEffect(() => {
+    console.error("New Interval ID is ", currentIntervalId)
+  }, [currentIntervalId])
 
   useEffect(() => {
     console.log("Time Frame Changed!");
@@ -155,11 +155,11 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
 
   async function getStockQuoteLocal() {
-    
 
-    const response=await getStockQuote(currentStock);
 
-    if(response.c==Infinity)
+    const response = await getStockQuote(currentStock);
+
+    if (response.c == Infinity)
       return;
 
     setStockQuote(response);
@@ -202,7 +202,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
 
 
-   
+
     if (!response.ok)
       return;
     else if (!response)
@@ -282,11 +282,11 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
     // const response = await fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${currentStock}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
     const response = await getStockProfileUtils(currentStock);
-    if (response==undefined)
+    if (response == undefined)
       return;
 
 
-    const pureData =response;
+    const pureData = response;
 
     console.log(pureData)
     setStockProfile(pureData);
@@ -319,7 +319,7 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
   return (
 
     <div>
-      <div className="pt-[110px] md:pt-16  overflow-hidden  min-w-full max-w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
+      <div className="pt-[135px] md:pt-20  overflow-hidden  min-w-full max-w-full bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
         <div className="  flex justify-center  md:max-w-[90%] w-full   mx-auto md:max-h-[calc(100vh-61px)] md:min-h-[calc(100vh-61px)] md:p-5">
 
@@ -342,39 +342,46 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
 
 
           {/* Main DashBoard */}
-          <div className="relative w-full flex flex-col  justify-center   min-h-full m-1  md:m-5 md:p-5 select-none">
+          <div className=" relative w-full flex flex-col  justify-center   min-h-full m-1  md:m-5 md:p-5 select-none">
 
-            <div className=" md:w-fit md:mt-5 ">
-              {
-
-                isMarketLive == true ?
-                  <div className=" items-center  justify-center flex   ">
+            <div className="block md:hidden w-full">
+              <div className=" md:w-fit md:mt-5 ">
+                {isMarketLive == true ? (
+                  <div className="items-center justify-center flex">
                     <div
                       onClick={() => {
-                        infoAlert("Market is Active from 7:00 PM to 1:30 AM IST(Indian Standard Time) on Working days.", "top-center", 5000)
+                        infoAlert(
+                          "Market is Active from 7:00 PM to 1:30 AM IST(Indian Standard Time) on Working days.",
+                          "top-center",
+                          5000
+                        );
                       }}
-
-                      className=' w-fit px-5   bg-black mb-4 flex gap-2 rounded-2xl items-center'>
-                      <span className='text-xl font-bold text-white  '>MARKET IS LIVE</span>
-                      <img src={LiveNow} className='h-[25px] ' />
+                      className="w-fit px-5 bg-black mb-4 flex gap-2 rounded-2xl items-center"
+                    >
+                      <span className="text-xl font-bold text-white">LIVE NOW</span>
+                      <img src={LiveNow} className="h-[25px]" />
                     </div>
                   </div>
-                  :
-                  <div className=" items-center  justify-center flex   ">
+                ) : (
+                  <div className="items-center justify-center flex">
                     <div
-
                       onClick={() => {
-                        infoAlert("Market is Active from 7:00 PM to 1:30 AM IST(Indian Standard Time) on Working days.", "top-center", 5000)
+                        infoAlert(
+                          "Market is Active from 7:00 PM to 1:30 AM IST(Indian Standard Time) on Working days.",
+                          "top-center",
+                          5000
+                        );
                       }}
-
-                      className=' w-fit px-5   bg-black mb-4 flex gap-2 rounded-2xl items-center'>
-                      <span className='text-xl font-bold text-white  '>MARKET IS CLOSED</span>
-                      <img src={NotLive} className='h-[25px] ' />
+                      className="w-fit px-5 bg-black mb-4 flex gap-2 rounded-2xl items-center"
+                    >
+                      <span className="text-xl font-bold text-white">NOT LIVE</span>
+                      <img src={NotLive} className="h-[25px]" />
                     </div>
                   </div>
-
-              }
+                )}
+              </div>
             </div>
+
 
 
 
@@ -528,73 +535,115 @@ const DashBoard = ({ successAlert, failAlert, infoAlert }) => {
                 }</div>
             }
 
-            <div className="relative w-full md:w-fit    md:absolute md:right-0 md:top-0 flex gap-3">
+            <div className="relative w-full md:w-fit    md:absolute md:right-0 md:top-0 flex flex-col   items-end gap-3">
+              <div className="flex gap-2 md:w-fit min-w-full">
+                <div className="w-fit md:block hidden">
+                  <Button
+                    variant="primary"
+                    kind="elevated"
+                    size="big"
+                    colorMode="dark"
 
-              <div className="w-fit md:block hidden">
-                <Button
-                  variant="primary"
-                  kind="elevated"
-                  size="big"
-                  colorMode="dark"
+                    onClick={() => {
+                      addToWatchlist();
+                    }}
+                  >
+                    <img src={addToWatchlistSVG} className="w-[40px] " />
+                  </Button>
+                </div>
 
-                  onClick={() => {
-                    addToWatchlist();
-                  }}
-                >
-                  <img src={addToWatchlistSVG} className="w-[40px] " />
-                </Button>
+
+
+                <div className="  grid grid-cols-2 w-full px-1 md:w-fit gap-2  md:gap-3">
+                  <Button
+
+                    fullWidth={true}
+                    variant="secondary"
+                    kind="elevated"
+                    size="big"
+                    colorMode="dark"
+
+                    colorConfig={{ color: 'white', backgroundColor: '#008000', edgeColors: { left: "black", top: 'black', right: '#D2D2D2', bottom: '#8A8A8A' } }}
+                    textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
+                    // className="  mr-2  bg-[#008000] px-5 py-2 text-2xl font-bold " 
+                    onClick={() => {
+                      if (!isLoggedIn) {
+                        infoAlert("Please Login before Trading!", 'top-center')
+                        return;
+                      }
+                      else if (isAuthenticated && totalUsers == -1) {
+                        infoAlert("Please Wait while fetching user details", 'top-center')
+                        return;
+                      }
+
+                      setIsOpen(1);
+                    }}><span>BUY</span></Button>
+                  <Button
+                    variant="secondary"
+                    kind="elevated"
+                    size="big"
+                    colorMode="dark"
+                    fullWidth={true}
+
+                    colorConfig={{ color: 'white', backgroundColor: '#EF0107', edgeColors: { left: "black", top: 'black', right: '#D2D2D2', bottom: '#8A8A8A' } }}
+                    textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
+
+
+                    onClick={() => {
+                      if (!isLoggedIn) {
+                        infoAlert("Please Login before Trading!", 'top-center')
+                        return;
+                      }
+                      else if (isAuthenticated && totalUsers == -1) {
+                        infoAlert("Please Wait while fetching user details", 'top-center')
+                        return;
+                      }
+                      setIsOpen(2)
+                    }}><span>SELL</span></Button>
+                </div>
               </div>
 
-              <div className="  grid grid-cols-2 w-full px-1 md:w-fit md:max-w-[300px] gap-2  md:gap-3">
-
-
-
-                <Button
-
-                  fullWidth={true}
-                  variant="secondary"
-                  kind="elevated"
-                  size="big"
-                  colorMode="dark"
-
-                  colorConfig={{ color: 'white', backgroundColor: '#008000', edgeColors: { left: "black", top: 'black', right: '#D2D2D2', bottom: '#8A8A8A' } }}
-                  textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
-                  // className="  mr-2  bg-[#008000] px-5 py-2 text-2xl font-bold " 
-                  onClick={() => {
-                    if (!isLoggedIn) {
-                      infoAlert("Please Login before Trading!", 'top-center')
-                      return;
-                    }
-                    else if (isAuthenticated && totalUsers == -1) {
-                      infoAlert("Please Wait while fetching user details", 'top-center')
-                      return;
-                    }
-
-                    setIsOpen(1);
-                  }}><span>BUY</span></Button>
-                <Button
-                  variant="secondary"
-                  kind="elevated"
-                  size="big"
-                  colorMode="dark"
-                  fullWidth={true}
-
-                  colorConfig={{ color: 'white', backgroundColor: '#EF0107', edgeColors: { left: "black", top: 'black', right: '#D2D2D2', bottom: '#8A8A8A' } }}
-                  textStyle={{ fontWeight: 'bold', fontSize: '30', fontType: 'Josefin Sans' }}
-
-
-                  onClick={() => {
-                    if (!isLoggedIn) {
-                      infoAlert("Please Login before Trading!", 'top-center')
-                      return;
-                    }
-                    else if (isAuthenticated && totalUsers == -1) {
-                      infoAlert("Please Wait while fetching user details", 'top-center')
-                      return;
-                    }
-                    setIsOpen(2)
-                  }}><span>SELL</span></Button>
+              <div className="hidden md:block  ">
+                <div className=" md:w-fit md:mt-5 ">
+                  {isMarketLive == true ? (
+                    <div className="items-center justify-center flex">
+                      <div
+                        onClick={() => {
+                          infoAlert(
+                            "Market is Active from 7:00 PM to 1:30 AM IST(Indian Standard Time) on Working days.",
+                            "top-center",
+                            5000
+                          );
+                        }}
+                        className="w-fit px-5 bg-black mb-4 flex gap-2 rounded-2xl items-center"
+                      >
+                        <span className="text-xl font-bold text-white">LIVE NOW</span>
+                        <img src={LiveNow} className="h-[25px]" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="items-center justify-center flex">
+                      <div
+                        onClick={() => {
+                          infoAlert(
+                            "Market is Active from 7:00 PM to 1:30 AM IST(Indian Standard Time) on Working days.",
+                            "top-center",
+                            5000
+                          );
+                        }}
+                        className="w-fit px-5 bg-black mb-4 flex gap-2 rounded-2xl items-center"
+                      >
+                        <span className="text-xl font-bold text-white">NOT LIVE</span>
+                        <img src={NotLive} className="h-[25px]" />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
+
+
+
+
 
             </div>
 

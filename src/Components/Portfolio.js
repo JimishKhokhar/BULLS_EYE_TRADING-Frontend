@@ -304,7 +304,7 @@ const Portfolio = () => {
 
 
   return (
-    <div className=' transition-all duration-500 w-full md:pt-16 bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white'>
+    <div className=' transition-all duration-500 w-full md:pt-20 pt-[32px] bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white'>
       {/* <button className='text-white' onClick={() => { setInnerComponent(1 ? innerComponent == 0 : 0) }}>Change Component</button> */}
 
       <div>

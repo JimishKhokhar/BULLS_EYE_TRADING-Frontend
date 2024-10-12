@@ -548,3 +548,30 @@ export async function findMarketStatusUtils() {
     }
 
 }
+
+export async function getAllStockQuotes(stocks)
+{
+    if(!stocks)
+        return {};
+    try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API}BullsEYETrading/getAllStockQuotes`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+            },
+            body: JSON.stringify({ stocks: stocks }) // Passing stock symbols to the backend
+        });
+
+        const pureData = await response.json();
+        console.log("All Stock Quotes Data from Utils: ", pureData);
+
+        if (response.status === 200) {
+            return pureData; // Returning the array of stock quotes
+        } else {
+            return []; // Returning empty array in case of error
+        }
+    } catch (error) {
+        console.error("Error fetching stock quotes: ", error);
+        return []; // Returning empty array in case of error
+    }
+}

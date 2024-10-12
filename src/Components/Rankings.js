@@ -48,7 +48,7 @@ const Rankings = () => {
 
   return (
 
-    <div className="relative w-full md:pt-20 pb-10 overflow-hidden  select-none bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
+    <div className="relative w-full md:pt-20 pb-10 pt-5 overflow-hidden  select-none bg-gradient-to-b from-black to-slate-800 bg-[linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8520658263305322) 100%)] text-white">
 
       <div className={`flex justify-center  md:max-w-[90%] w-full md:pt-0 pt-5  content-center ${topTen.length == 0 ? "max-h-[calc(100vh-61px)]" : ""}  mx-auto  min-h-[calc(100vh-61px)]  md:p-5`}>
         <div className={`  ${topTen.length == 0 ? "" : ""}  flex justify-center w-full  content-center align-middle `}>
